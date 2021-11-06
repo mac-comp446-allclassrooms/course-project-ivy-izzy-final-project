@@ -1,5 +1,5 @@
 body {
-    background-color: #b6e2ca;
+    background-color: #e2faeb;
 }
 
 .logo-form {
@@ -10,7 +10,14 @@ body {
 } 
 
 .img-logo {
-    background-color: #b6e2ca;
+    background-color: #d8f1e4;
+    box-shadow:
+        0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+        0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+        0 12.5px 10px rgba(0, 0, 0, 0.06),
+        0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+        0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+        0 100px 80px rgba(0, 0, 0, 0.12);
 }
 
 .login-form {
@@ -31,7 +38,7 @@ body {
 form {
     display: flex;
     background-color: #14a491;
-    justify-content: center;
+    align-content: flex-end;
     flex-direction: column;
     margin:1em;
     margin-top: 10em;
@@ -39,6 +46,13 @@ form {
     border-radius: 1em;
     width:25em;
     height:30em;
+    box-shadow:
+        0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+        0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+        0 12.5px 10px rgba(0, 0, 0, 0.06),
+        0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+        0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+        0 100px 80px rgba(0, 0, 0, 0.12);
 }
 
 #create-account {
@@ -51,9 +65,11 @@ form {
     display: flex;
     align-items: flex-end;
     justify-content: center;
+    min-width: min-content;
     height:20em;
     flex-wrap: wrap;
-    row-gap: 0.01em;
+    row-gap: 1em;
+    margin-top:3em; 
 }
 
 .password-forgotpword {
@@ -77,5 +93,28 @@ form {
     margin-top:-25em;
     height: 15%;
     width: 15%;
+}
 
+.text-input {
+    width: 23em;
+}
+
+h2 {
+    color: white
+}
+label {
+    color: white;
+}
+a {
+    color: white;
+    text-decoration: underline;
+}
+
+#login-button {
+    background-color: #a4c3b2;
+    border-color: #a4c3b2;
+    border-radius: 35px;
+}
+#Email, #password {
+    border-radius: 35px;
 }
