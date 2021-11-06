@@ -15,14 +15,14 @@ body {
 
 .login-form {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     width: 35em;
 }
 
 #logo-and-form {
     display:flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     column-gap: 2em;
@@ -30,8 +30,9 @@ body {
 
 form {
     display: flex;
-    align-items: flex-end;
     background-color: #14a491;
+    justify-content: center;
+    flex-direction: column;
     margin:1em;
     margin-top: 10em;
     padding:1em;
@@ -49,14 +50,32 @@ form {
 #form-container {
     display: flex;
     align-items: flex-end;
+    justify-content: center;
     height:20em;
     flex-wrap: wrap;
     row-gap: 0.01em;
 }
 
 .password-forgotpword {
-    display: flex;
-    align-self: flex-end;
-    justify-content: center;
     column-gap: 3em;
+}
+
+#login {
+    font-size:x-large;
+}
+
+#login-text {
+    display:flex;
+    justify-items: left;
+    margin:0;
+}
+
+#animation-login {
+    display:flex;
+    justify-items: left;
+    margin-left:-10em;
+    margin-top:-25em;
+    height: 15%;
+    width: 15%;
+
 }
