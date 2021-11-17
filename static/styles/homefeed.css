@@ -107,3 +107,12 @@ body {
     border-radius: 1em;
     padding: 1em;
 }
+
+.title-and-recording { 
+    display: flex;
+    flex-direction: column;
+}
+
+.audio-title { 
+    max-width: 30em;
+}
