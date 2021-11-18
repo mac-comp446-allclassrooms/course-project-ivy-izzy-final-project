@@ -1,15 +1,18 @@
+function darkmode() {
+  const wasDarkmode = localStorage.getItem('darkmode') === 'true';
+  localStorage.setItem('darkmode', !wasDarkmode);
+  document.body.classList.toggle('dark-mode', !wasDarkmode);
+  // for(element in document.h1){
+  //   element.classList.toggle('dark-mode', !wasDarkmode);
+  // }
 
-var coll = document.getElementsByClassName("collapsible");
-var i;
+  // for(let element2 in document.h2){
+  //   element2.classList.toggle('dark-mode', !wasDarkmode);
+  // }
+  
+  
+}
 
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-    }
-  });
+function onload() {
+  document.body.classList.toggle('dark-mode', localStorage.getItem('darkmode') === 'true');
 }

@@ -116,3 +116,8 @@ body {
 .audio-title { 
     max-width: 30em;
 }
+
+.dark-mode { 
+    background-color: #3D524C;
+    color: #c3ebd3;
+}

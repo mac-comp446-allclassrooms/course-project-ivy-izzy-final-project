@@ -46,10 +46,12 @@ def index():
 #example of a page which can be a form
 #you can add an HTTP method such as post for data
 #there are request and response objects in flask
-@app.route("/homefeed", methods=["POST"])
+@app.route("/homefeed", methods=['POST', "GET"])
 def homefeed():
-    title="Homefeed"
-    return render_template("homefeed.html", title=title)
+    if request.method == "POST": 
+        title="Homefeed"
+        return render_template("homefeed.html", title=title)
+    return render_template("homefeed.html", title="Homefeed")
 
 
 @app.route("/profile")
@@ -61,3 +63,8 @@ def profile():
 def settings(): 
     title="Settings Page"
     return render_template("settings.html", title=title)
+
+@app.route("/create")
+def create(): 
+    title="create post"
+    return render_template("create.html", title=title)
