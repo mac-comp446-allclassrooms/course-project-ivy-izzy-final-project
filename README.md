@@ -1,4 +1,4 @@
-# Project Title Goes Here
+# So-tion Social Media
 
 Info about your project goes here
 
