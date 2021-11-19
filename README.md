@@ -1,4 +1,4 @@
-# So-tion Social Media
+# ✨So-tion✨ Social Media
 
 Info about your project goes here
 
