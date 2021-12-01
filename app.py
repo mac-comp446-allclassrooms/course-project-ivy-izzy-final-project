@@ -69,7 +69,7 @@ def index():
             user.is_authenticated=True
             db.session.add(user)
             db.session.commit()
-            return render_template("homefeed.html", title=current_user.username + "'s homefeed", username=username )
+            return redirect('/homefeed')
         return '<h1>Invalid username or password</h1>'
     return render_template('index.html', form=form)
     
