@@ -27,9 +27,9 @@ body {
     width: 35em;
 }
 
-#logo-and-form {
+#signup-logo-and-form {
     display:flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     column-gap: 2em;
@@ -38,14 +38,14 @@ body {
 form {
     display: flex;
     background-color: #14a491;
-    align-content: flex-end;
+    align-content: center;
     flex-direction: column;
     margin:1em;
     margin-top: 10em;
     padding:1em;
     border-radius: 1em;
     width:25em;
-    height:30em;
+    height:32em;
     box-shadow:
         0 2.8px 2.2px rgba(0, 0, 0, 0.034),
         0 6.7px 5.3px rgba(0, 0, 0, 0.048),
@@ -55,18 +55,14 @@ form {
         0 100px 80px rgba(0, 0, 0, 0.12);
 }
 
-#create-account {
-    display:flex;
-    align-items: center;
-    justify-self: start;
-}
 
-#form-container {
+#signup-form-container {
     display: flex;
     align-items: flex-end;
     justify-content: center;
+    align-items: center;
     min-width: min-content;
-    height:20em;
+    height:15em;
     flex-wrap: wrap;
     row-gap: 1em;
     margin-top:3em; 
@@ -76,17 +72,17 @@ form {
     column-gap: 3em;
 }
 
-#login {
+#signup {
     font-size:x-large;
 }
 
-#login-text {
+#signup-text {
     display:flex;
     justify-items: left;
     margin:0;
 }
 
-#animation-login {
+#signup-animation-login {
     display:flex;
     justify-items: left;
     margin-left:-10em;
@@ -111,12 +107,14 @@ a {
     text-decoration: underline;
 }
 
-#login-button {
+#signup-button {
     background-color: #a4c3b2;
     border-color: #a4c3b2;
-    border-radius: 35px;
+    border-radius: 90px;
+    width:10em
+
 }
-#username, #password {
+#email, #password, #username {
     border-radius: 35px;
     border: none;
     padding-left: 1.5em;

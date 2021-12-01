@@ -1,7 +1,5 @@
-
 <!doctype html>
 <html lang="en">
-
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -10,40 +8,42 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="/styles/signin.css" />
-  <title>{{title}}</title>
-
+  <link rel="stylesheet" href="/styles/signup.css" />
+  <title>Create A New Account</title>
 </head>
 
 <body>
-  <div id="logo-and-form">
-    <form action="/" method="post">
-      <div id="login">
-        <h2 id="login-text">Login</h2>
+  <div id="signup-logo-and-form">
+    <form action="/signup" method="post">
+      <div id="signup">
+        <h2 id="signup-text">Sign up</h2>
       </div>
-      <div id="form-container">
-        <div class="form-group first">
-          <label for="username">Username</label>
+      <div id="signup-form-container">
+          <div class="form-group first">
+          <label for="Email">E-Mail</label>
           {{ form.hidden_tag() }}
-          {{ form.username}}
+
+          {{ form.email}}          </div>
         </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            {{ form.username}}          </div>
         <div class=" form-group ">
           <label for="password">Password</label>
-          {{ form.password}}
+         {{ form.password}}   
+        </div>
         </div>
         <div class="d-sm-flex password-forgotpword">
           <label class="control control--checkbox mb-3 mb-sm-0"><span class="caption">Remember me</span>
-            {{ form.remember}}
+            <input type="checkbox" checked="">
             <div class="control__indicator"></div>
           </label>
           <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span>
         </div>
-        <input id="login-button" type="submit" value="Log In" class="btn btn-block btn-primary">
-        <span id="create-account"><a href="{{url_for('signup')}}" class="forgot-pass">Don't have an Account?</a></span>
+        <input id="signup-button" type="submit" value="Sign Up" class="btn btn-block btn-primary">
       </div>
     </form>
-    <img id='animation-login' src="/images/sotion.gif" style="border-radius: 2em;" class="img-logo img-fluid"
-      alt="So-tion Logo" />
+    <img id='signup-animation-login' src="/images/sotion.gif" style="border-radius: 2em;" class="img-logo img-fluid" alt="So-tion Logo" />
 
   </div>
   <!-- Optional JavaScript -->

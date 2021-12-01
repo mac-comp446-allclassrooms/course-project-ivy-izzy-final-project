@@ -61,9 +61,18 @@ body {
     position: fixed;
 }
 
-#navbar-divider {
+.navbar-divider {
     height: 2px;
     background-color: #66afa5;
+    margin-top: 5em;
+    margin-bottom: 1em;
+    border-radius: 5em;
+}
+
+.navbar-divider.dark-mode{
+    height: 2px;
+    background-color: #3D524C;
+    color: #3D524c;
     margin-top: 5em;
     margin-bottom: 1em;
     border-radius: 5em;

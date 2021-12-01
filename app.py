@@ -1,58 +1,99 @@
+from os import error
 from flask import Flask, render_template, request, redirect
+from flask.helpers import url_for
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+from form import LoginForm
+from wtforms import StringField, PasswordField, BooleanField
+from wtforms.validators import InputRequired, Length
+from flask_wtf import FlaskForm 
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__, static_url_path='')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///friends.db'
-#initialize the database
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///login.db'
+app.config['SECRET_KEY'] = 'thisissecret'
 db = SQLAlchemy(app)
 
-#create a db model
-class Friends(db.Model):
+#initialize the login-- Used a tutorial from https://www.youtube.com/watch?v=2dEM-s3mRLE
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200), nullable=False)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    email = db.Column(db.String(75), unique=True)
+    username = db.Column(db.String(30), unique=True)
+    password_hash = db.Column(db.String())
+    is_authenticated = db.Column(db.Boolean, default=False)
+ 
+    def set_password(self,password):
+        self.password_hash = generate_password_hash(password)
+     
+    def check_password(self,password):
+        return check_password_hash(self.password_hash,password)
 
-    def __repr__(self):
-        return '<Name %r' % self.id
-
-@app.route("/friends", methods=['POST', 'GET'])
-def friends():
-    title = "My Friends List, yay!"
-
-    if request.method == "POST":
-        # add to database
-        friend_name = request.form['name']
-        new_friend = Friends(name=friend_name)
-        # push into database
-
-        try:
-            db.session.add(new_friend)
-            db.session.commit()
-            return redirect('/friends')
-        except:
-            return "There was an error adding this to the database..."
+    def setUsername(self,username):
+        self.username = username
     
-    else:
-        friends = Friends.query.order_by(Friends.date_created)
-        return render_template('friends.html', title=title, friends=friends)
-    
-@app.route("/")
+    def setEmail(self, email): 
+        self.email = email
+
+class LoginForm(FlaskForm):
+    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
+    password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
+    remember = BooleanField('remember me')
+
+class RegisterForm(FlaskForm):
+    email = StringField('email', validators=[InputRequired(), Length(max=50)])
+    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
+    password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
+
+@login_manager.user_loader
+def user_loader(user_id):
+    return User.query.filter_by(id=user_id).first()
+
+@app.route("/", methods=["GET", "POST"])
 def index():
-    title = "Login!"
-    return render_template("index.html", title=title)
+    if current_user.is_authenticated:
+        return redirect('/homefeed')
+    form = LoginForm()
 
+    if form.validate_on_submit():
+        username = request.form.get("username")
+        password = request.form.get('password')
+        user = User.query.filter_by(username=username).first()
+        usernamesmatch = user.username == username
+        passwordsmatch = user.check_password(password)
+        if usernamesmatch and passwordsmatch:
+            login_user(user)
+            print('help')
+            user.is_authenticated = True
+            
+            return render_template("homefeed.html", title=current_user.username + "'s homefeed", username=username )
+        return '<h1>Invalid username or password</h1>'
+    return render_template('index.html', form=form)
+    
+@app.route('/logout')
+@login_required
+def logout():
+    current_user.is_authenticated = False
+    db.session.add(current_user)
+    db.session.commit()
+    logout_user()
+    return("You've been logged out!")
 
-#example of a page which can be a form
-#you can add an HTTP method such as post for data
-#there are request and response objects in flask
+@app.route('/whoisuser')
+@login_required
+def whoisuser(): 
+    return "the current user is: "+  current_user.username
+
 @app.route("/homefeed", methods=['POST', "GET"])
+@login_required
 def homefeed():
     if request.method == "POST": 
-        title="Homefeed"
-        return render_template("homefeed.html", title=title)
-    return render_template("homefeed.html", title="Homefeed")
-
+        title="'s Homefeed"
+        return render_template("homefeed.html", title=current_user.username + title, username=current_user.username )
+    return render_template("homefeed.html", title=(current_user.username + "'s Homefeed"), username=current_user.username )
 
 @app.route("/profile")
 def profile(): 
@@ -68,3 +109,31 @@ def settings():
 def create(): 
     title="create post"
     return render_template("create.html", title=title)
+
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if current_user.is_authenticated:
+        return redirect('/homefeed')
+    form = RegisterForm()
+
+    if form.validate_on_submit():
+        username = request.form.get("username")
+        password = request.form.get('password')
+        email = request.form.get('email')
+
+        usernameindb = User.query.filter_by(username=username).first()
+        emailindb = User.query.filter_by(email=email).first()
+        if usernameindb:
+            return "<h1> This username is already taken! </h1>"
+        elif emailindb: 
+            return "<h1> This email already has an account associated with it!</h1>"
+        else: 
+            new_user = User(username = username, email=email, is_authenticated = True)
+            new_user.set_password(password)
+            db.session.add(new_user)
+            db.session.commit()
+            login_user(new_user)
+            return redirect('/homefeed')
+    return render_template('newProfile.html', form=form)
+    
