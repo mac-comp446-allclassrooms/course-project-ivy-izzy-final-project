@@ -66,9 +66,9 @@ def index():
         passwordsmatch = user.check_password(password)
         if usernamesmatch and passwordsmatch:
             login_user(user)
-            print('help')
-            user.is_authenticated = True
-            
+            user.is_authenticated=True
+            db.session.add(user)
+            db.session.commit()
             return render_template("homefeed.html", title=current_user.username + "'s homefeed", username=username )
         return '<h1>Invalid username or password</h1>'
     return render_template('index.html', form=form)
@@ -76,7 +76,6 @@ def index():
 @app.route('/logout')
 @login_required
 def logout():
-    current_user.is_authenticated = False
     db.session.add(current_user)
     db.session.commit()
     logout_user()
@@ -87,13 +86,13 @@ def logout():
 def whoisuser(): 
     return "the current user is: "+  current_user.username
 
-@app.route("/homefeed", methods=['POST', "GET"])
+@app.route('/homefeed', methods=['POST', "GET"])
 @login_required
 def homefeed():
+    title="'s Homefeed"
     if request.method == "POST": 
-        title="'s Homefeed"
         return render_template("homefeed.html", title=current_user.username + title, username=current_user.username )
-    return render_template("homefeed.html", title=(current_user.username + "'s Homefeed"), username=current_user.username )
+    return render_template("homefeed.html", title=(current_user.username + title), username=current_user.username )
 
 @app.route("/profile")
 def profile(): 
@@ -131,9 +130,9 @@ def signup():
         else: 
             new_user = User(username = username, email=email, is_authenticated = True)
             new_user.set_password(password)
+            login_user(new_user)
             db.session.add(new_user)
             db.session.commit()
-            login_user(new_user)
-            return redirect('/homefeed')
+            return render_template("homefeed.html", title=current_user.username + "'s homefeed", username=username )
     return render_template('newProfile.html', form=form)
     

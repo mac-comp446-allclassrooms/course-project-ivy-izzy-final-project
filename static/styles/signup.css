@@ -29,7 +29,7 @@ body {
 
 #signup-logo-and-form {
     display:flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     column-gap: 2em;
@@ -38,7 +38,7 @@ body {
 form {
     display: flex;
     background-color: #14a491;
-    align-content: center;
+    align-content: flex-end;
     flex-direction: column;
     margin:1em;
     margin-top: 10em;
@@ -60,12 +60,11 @@ form {
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    align-items: center;
     min-width: min-content;
-    height:15em;
+    height:20em;
     flex-wrap: wrap;
     row-gap: 1em;
-    margin-top:3em; 
+    margin-top:5em; 
 }
 
 .password-forgotpword {
@@ -110,9 +109,7 @@ a {
 #signup-button {
     background-color: #a4c3b2;
     border-color: #a4c3b2;
-    border-radius: 90px;
-    width:10em
-
+    border-radius: 35px;
 }
 #email, #password, #username {
     border-radius: 35px;
