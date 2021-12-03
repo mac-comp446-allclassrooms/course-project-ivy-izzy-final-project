@@ -41,7 +41,8 @@ class User(UserMixin, db.Model):
 class Post(db.Model): 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, unique=False)
-    post_content = db.Column(db.String(280), unique=False) 
+    post_title = db.Column(db.String(300), unique=False)
+    post_content = db.Column(db.String(2800), unique=False) 
     profile_pic = db.Column(db.Boolean, default=False)  
 
 class LoginForm(FlaskForm):
@@ -55,7 +56,8 @@ class RegisterForm(FlaskForm):
     password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
 
 class PostForm(FlaskForm): 
-    content = StringField('content', validators=[InputRequired(), Length(max=280)])
+    content = StringField('content', validators=[InputRequired(), Length(max=2800)])
+    title = StringField('title', validators=[InputRequired(), Length(max=300)] )
 
 @login_manager.user_loader
 def user_loader(user_id):
@@ -103,8 +105,9 @@ def homefeed():
     postz = Post.query.filter_by(user_id = current_user.id).all()
     if request.method == "POST": 
         content = request.form.get("content")
+        title = request.form.get("title")
         user_id = current_user.id
-        new_post = Post(user_id = user_id, post_content = content, profile_pic = False)
+        new_post = Post(user_id = user_id, post_content = content, post_title=title, profile_pic = False)
         db.session.add(new_post)
         db.session.commit()
         postz = Post.query.filter_by(user_id = current_user.id).all()
@@ -137,7 +140,9 @@ def settings():
 @login_required
 def settings2(username): 
     title="Settings Page"
-    return render_template("settings.html", title=title, username=username)
+    if current_user.username == username: 
+        return render_template("settings.html", title=title, username=username)
+    return "ah ah ah this isn't your account you bootyhole"
 
 @app.route("/create")
 @login_required

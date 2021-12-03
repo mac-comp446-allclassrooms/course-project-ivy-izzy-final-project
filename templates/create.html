@@ -13,6 +13,9 @@
 
 <form action="/homefeed" method='POST' id="upload-podcast">
     {{ form.hidden_tag() }}
+    <label for="title">Title</label>
+    {{ form.title}}
+    <label for="content">Content</label>
     {{ form.content}}
     <input id="signup-button" type="submit" value="Submit post :)" class="btn btn-block btn-primary">
 </form>
