@@ -5,37 +5,55 @@
 <link rel="stylesheet" href="../styles/homefeed.css">
 
 
-        <div style="margin-top: 3em; background-image: url('ImageLocation');background-size: cover; height:480px; padding-top:80px;">
-            <img src="/images/So-tion-logo-pic.png" style="height:150px;
+<div
+    style="margin-top: 3em; background-image: url('ImageLocation');background-size: cover; height:480px; padding-top:80px;">
+    <img src="/images/So-tion-logo-pic.png" style="height:150px;
             border-radius: 50%; border: 5px solid #0f5302;" alt="A User's Profile Picture" id=pfp>
-            <input id="imageUpload" type="file" 
-            name="profile_photo" placeholder="Photo" required="" capture>
-            <h1> your name here</h1>
-            <p><em> your bio here</em></p>
-          </div>
+    <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo" required="" capture>
+    <h1> your name here</h1>
+    <p><em> your bio here</em></p>
+</div>
 
-          <a href="{{url_for('create')}}"><button>create post</button></a>
-          <button onclick='movepfp()' id=pfpbutt>make pfp move 💃</button>
+<a href="{{url_for('create')}}"><button>create post</button></a>
+<button onclick='movepfp()' id=pfpbutt>make pfp move 💃</button>
 
-          <script src="https://code.jquery.com/jquery-3.3.1.js"
-          integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-          crossorigin="anonymous">
-              
-            $("#pfp").click(function(e) {
-                $("#imageUpload").click();
-            });
+{% for post in posts %}
+<!-- I used this website: https://stackoverflow.com/questions/17691838/range-in-jinja2-inside-a-for-loop-->
+<div class="post">
+    <div class="content">
+        <div class="pic-and-username">
+            <img class="profile-icon" src="../images/profile-icon.png" alt="Profile picture">
+        </div>
+        <div class="content-and-comments">
+            <p> {{ post.post_content }}</p>
+            <div class="comments">
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous">
+
+        $("#pfp").click(function (e) {
+            $("#imageUpload").click();
+        });
 
 
-            $("#pfpbutt").click(function() {
-                $("#pfp").toggleClass("buttonMove");
-            });
+        $("#pfpbutt").click(function () {
+            $("#pfp").toggleClass("buttonMove");
+        });
 
-          </script>
-          <script src="scripts/pfpage.js"></script>
+    </script>
+<script src="scripts/pfpage.js"></script>
 
 
-          <style>
-              .buttonMove {margin-right:50px;} 
-          </style>
+<style>
+    .buttonMove {
+        margin-right: 50px;
+    }
+</style>
 
 {% endblock content %}

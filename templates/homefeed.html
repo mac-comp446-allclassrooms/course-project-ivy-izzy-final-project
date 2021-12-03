@@ -18,6 +18,23 @@
       </div>
     </div>
   </div>
+  {% for post in post1 %}     <!-- I used this website: https://stackoverflow.com/questions/17691838/range-in-jinja2-inside-a-for-loop-->           
+  <div class="post">
+    <div class="content">
+      <div class="pic-and-username">
+        <img class="profile-icon" src="../images/profile-icon.png" alt="Profile picture">
+        <p style="text-align: center;"class="username">{{ username }}</p>
+      </div>
+      <div class="content-and-comments">
+        <p> {{ post.post_content }}</p>
+        <div class="comments">
+
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+ 
 
   <div class="post">
     <div class="content">

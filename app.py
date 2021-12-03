@@ -40,8 +40,9 @@ class User(UserMixin, db.Model):
 
 class Post(db.Model): 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer)
-    
+    user_id = db.Column(db.Integer, unique=False)
+    post_content = db.Column(db.String(280), unique=False) 
+    profile_pic = db.Column(db.Boolean, default=False)  
 
 class LoginForm(FlaskForm):
     username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
@@ -52,6 +53,9 @@ class RegisterForm(FlaskForm):
     email = StringField('email', validators=[InputRequired(), Length(max=50)])
     username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
     password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
+
+class PostForm(FlaskForm): 
+    content = StringField('content', validators=[InputRequired(), Length(max=280)])
 
 @login_manager.user_loader
 def user_loader(user_id):
@@ -84,7 +88,7 @@ def logout():
     db.session.add(current_user)
     db.session.commit()
     logout_user()
-    return("You've been logged out!")
+    return redirect('/')
 
 @app.route('/whoisuser')
 @login_required
@@ -94,15 +98,22 @@ def whoisuser():
 @app.route('/homefeed', methods=['POST', "GET"])
 @login_required
 def homefeed():
-    return redirect('/homefeed/'+current_user.username)
-
-@app.route('/homefeed/<username>', methods=['POST', "GET"])
-@login_required
-def homefeed2(username):
     title="'s Homefeed"
+    username = current_user.username
+    postz = Post.query.filter_by(user_id = current_user.id).all()
     if request.method == "POST": 
-        return render_template("homefeed.html", title=current_user.username + title, username=username)
-    return render_template("homefeed.html", title=(current_user.username + title), username=username )
+        content = request.form.get("content")
+        user_id = current_user.id
+        new_post = Post(user_id = user_id, post_content = content, profile_pic = False)
+        db.session.add(new_post)
+        db.session.commit()
+        postz = Post.query.filter_by(user_id = current_user.id).all()
+        return render_template("homefeed.html", title=current_user.username + title, username=username, post1 = postz)
+    return render_template("homefeed.html", title=(current_user.username + title), username=username, post1=postz )
+
+# @app.route('/homefeed/<username>')
+# @login_required
+# def homefeed2(username):
 
 @app.route("/profile")
 @login_required
@@ -113,7 +124,9 @@ def profile():
 @login_required
 def profile2(username): 
     title="Profile Page"
-    return render_template("profilePage.html", title=title, username=username)
+    person = User.query.filter_by(username=username).first()
+    posts= Post.query.filter_by(user_id = person.id).all()
+    return render_template("profilePage.html", title=title, username=username, posts=posts)
 
 @app.route("/settings")
 @login_required
@@ -130,7 +143,8 @@ def settings2(username):
 @login_required
 def create(): 
     title="create post"
-    return render_template("create.html", title=title)
+    form = PostForm()
+    return render_template("create.html", title=title, form=form)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
