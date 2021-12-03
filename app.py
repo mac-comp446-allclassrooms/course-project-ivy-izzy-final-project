@@ -38,6 +38,11 @@ class User(UserMixin, db.Model):
     def setEmail(self, email): 
         self.email = email
 
+class Post(db.Model): 
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    
+
 class LoginForm(FlaskForm):
     username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
     password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
@@ -89,22 +94,40 @@ def whoisuser():
 @app.route('/homefeed', methods=['POST', "GET"])
 @login_required
 def homefeed():
+    return redirect('/homefeed/'+current_user.username)
+
+@app.route('/homefeed/<username>', methods=['POST', "GET"])
+@login_required
+def homefeed2(username):
     title="'s Homefeed"
     if request.method == "POST": 
-        return render_template("homefeed.html", title=current_user.username + title, username=current_user.username )
-    return render_template("homefeed.html", title=(current_user.username + title), username=current_user.username )
+        return render_template("homefeed.html", title=current_user.username + title, username=username)
+    return render_template("homefeed.html", title=(current_user.username + title), username=username )
 
 @app.route("/profile")
+@login_required
 def profile(): 
+    return redirect('/profile/' + current_user.username)
+
+@app.route("/profile/<username>")
+@login_required
+def profile2(username): 
     title="Profile Page"
-    return render_template("profilePage.html", title=title)
+    return render_template("profilePage.html", title=title, username=username)
 
 @app.route("/settings")
+@login_required
 def settings(): 
+    return redirect('/settings/' + current_user.username)
+
+@app.route("/settings/<username>")
+@login_required
+def settings2(username): 
     title="Settings Page"
-    return render_template("settings.html", title=title)
+    return render_template("settings.html", title=title, username=username)
 
 @app.route("/create")
+@login_required
 def create(): 
     title="create post"
     return render_template("create.html", title=title)
@@ -128,11 +151,12 @@ def signup():
         elif emailindb: 
             return "<h1> This email already has an account associated with it!</h1>"
         else: 
-            new_user = User(username = username, email=email, is_authenticated = True)
+            new_user = User(username = username, email=email)
             new_user.set_password(password)
-            login_user(new_user)
+            new_user.is_authenticated=True
             db.session.add(new_user)
             db.session.commit()
+            login_user(new_user)
             return render_template("homefeed.html", title=current_user.username + "'s homefeed", username=username )
     return render_template('newProfile.html', form=form)
     

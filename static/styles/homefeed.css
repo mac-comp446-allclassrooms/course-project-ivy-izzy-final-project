@@ -130,3 +130,10 @@ body {
     background-color: #3D524C;
     color: #c3ebd3;
 }
+
+#username-block {
+    background-color: #3D524c;
+    padding: 3px;
+    border-radius: 6px;
+    color:#a5e1d9;
+}

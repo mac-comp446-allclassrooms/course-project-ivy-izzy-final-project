@@ -1,4 +1,12 @@
 .buttonMove {
-    margin-left:50px;
-    padding-left:50px;
+    display: flex;
+    justify-content: flex-end;
 }
+
+#pfpbutt {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+

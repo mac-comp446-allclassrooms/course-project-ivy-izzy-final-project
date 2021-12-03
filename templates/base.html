@@ -5,41 +5,40 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles/homefeed.css">
-
+    <link rel="stylesheet" href="../styles/homefeed.css">
     <title>{{ title }}</title>
-
 </head>
 
 <body>
-
     <nav class="fixed-top">
         <div class="navbar fixed-top nav">
             <div id="logo-and-search">
-                <img class="navbar-logo" src="images/So-tion-logo-pic.png" href="#" alt="So-tion logo" />
+                <img class="navbar-logo" src="../images/So-tion-logo-pic.png" href="#" alt="So-tion logo" />
                 <input type="search" class="form-control" id="search-input" placeholder="Search..."
                     aria-label="Search for..." autocomplete="off" spellcheck="false" role="combobox"
                     aria-autocomplete="list" aria-expanded="false" aria-owns="algolia-autocomplete-listbox-0" dir="auto"
                     style="position: relative; vertical-align: top;">
             </div>
+            <div id='username-block'>
+                <h4 id="username-text">&#x2728;{{username}}&#x2728;</h4>
+            </div>
             <div id="right-navbar-images">
                 <a href="{{ url_for('profile') }}">
-                    <img class="profile-icon-navbar" src="images/profile-icon.png" alt="profile icon button"/></a>
-                    <a href="{{ url_for('homefeed') }}">
-                <img class="home-navbar" src="images/home.jpg" href="{{ url_for('homefeed') }}" alt="Home button"/></a>
+                    <img class="profile-icon-navbar" src="../images/profile-icon.png" alt="profile icon button" /></a>
+                <a href="{{ url_for('homefeed') }}">
+                    <img class="home-navbar" src="../images/home.jpg" href="{{ url_for('homefeed') }}"
+                        alt="Home button" /></a>
                 <a href="{{ url_for('settings') }}">
-                <img class="gear-navbar" src="images/gear.png" href="#" alt="Gear button"/></a>
+                    <img class="gear-navbar" src="../images/gear.png" href="#" alt="Gear button" /></a>
             </div>
         </div>
         <div class="navbar-divider nav"></div>
     </nav>
 
     {% block content %}
-
     {% endblock %}
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
