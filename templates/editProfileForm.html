@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<body>
+    <h1 style="margin-top:3em;">Edit your Profile Page Layout :3</h1>
+
+    <div>
+        <form action="/update-profile" method="post">
+            {{ form.hidden_tag() }}
+            <label for="profile_pic_placement">Profile Pic Placement</label>
+            {{ form.profile_pic_placement}}
+            <label for="bio_placement">Bio Placement</label>
+            {{ form.bio_placement }}
+            <label for="post_placement">Post Placement</label>
+            {{ form.post_placement }}
+            <input id="submit-button" type="submit" value="Submit" class="btn btn-block btn-primary">
+        </form>
+    </div>
+</body>
+{% endblock content %}

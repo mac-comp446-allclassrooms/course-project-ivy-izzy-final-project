@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect
 from flask.helpers import url_for
 from flask_sqlalchemy import SQLAlchemy
 from form import LoginForm
-from wtforms import StringField, PasswordField, BooleanField
+from wtforms import StringField, PasswordField, BooleanField, RadioField
 from wtforms.validators import InputRequired, Length
 from flask_wtf import FlaskForm 
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -25,7 +25,11 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(30), unique=True)
     password_hash = db.Column(db.String())
     is_authenticated = db.Column(db.Boolean, default=False)
- 
+    pfp_placement = db.Column(db.String(), default="center")
+    bio_placement = db.Column(db.String(), default="center")
+    post_placement = db.Column(db.String(), default="center")
+
+
     def set_password(self,password):
         self.password_hash = generate_password_hash(password)
      
@@ -58,6 +62,11 @@ class RegisterForm(FlaskForm):
 class PostForm(FlaskForm): 
     content = StringField('content', validators=[InputRequired(), Length(max=2800)])
     title = StringField('title', validators=[InputRequired(), Length(max=300)] )
+
+class EditProfileForm(FlaskForm): 
+    profile_pic_placement = RadioField('profile_pic_placement', validators=[InputRequired()], choices = ['center', 'left', 'right'])
+    bio_placement = RadioField('bio_placement', validators=[InputRequired()], choices = ['center', 'left', 'right'])
+    post_placement = RadioField('post_placement', validators=[InputRequired()], choices = ['center', 'left', 'right'])
 
 @login_manager.user_loader
 def user_loader(user_id):
@@ -127,9 +136,15 @@ def profile():
 @login_required
 def profile2(username): 
     title="Profile Page"
-    person = User.query.filter_by(username=username).first()
-    posts= Post.query.filter_by(user_id = person.id).all()
-    return render_template("profilePage.html", title=title, username=username, posts=posts)
+    if current_user.username == username: 
+        person = User.query.filter_by(username=current_user.username).first()
+        posts= Post.query.filter_by(user_id = person.id).all()
+        pfpalignment= person.pfp_placement
+        return render_template("profilePage.html", title=title, username=username, profileusername=username, posts=posts, pfp = pfpalignment)
+    else: 
+        person = User.query.filter_by(username=username).first()
+        posts= Post.query.filter_by(user_id = person.id).all()
+        return render_template("profilePage.html", title=title, profileusername=username,username=current_user.username, posts=posts)
 
 @app.route("/settings")
 @login_required
@@ -179,3 +194,23 @@ def signup():
             return render_template("homefeed.html", title=current_user.username + "'s homefeed", username=username )
     return render_template('newProfile.html', form=form)
     
+
+@app.route("/editprofile", methods=["GET", "POST"])
+@login_required
+def editprofile(): 
+    title="Edit your profile!!"
+    form = EditProfileForm()
+    return render_template("editProfileForm.html", title=title, form=form)
+
+@app.route("/update-profile", methods=["GET", "POST"])
+@login_required
+def update_profile(): 
+    pfp = request.form.get('profile_pic_placement')
+    posts = request.form.get('post_placement')
+    bio = request.form.get("bio_placement")
+    user = User.query.filter_by(id=current_user.id).first()
+    user.pfp_placement = pfp
+    user.bio_placement = bio
+    user.post_placement = posts
+    db.session.commit()
+    return redirect('/profile')
