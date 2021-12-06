@@ -1,6 +1,7 @@
 .container {
     display: grid;
     column-gap: 5rem;
+    row-gap: 3rem;
     /* grid-template-rows: repeat(10, 50px); */
     /* grid-template-columns: repeat(5, 1fr 2fr); */
 }
@@ -11,9 +12,9 @@
     margin-top: 3em;
     background-image: url('ImageLocation');
     background-size: cover; 
-    height:480px; 
+    height:380px; 
     padding-top:80px;
-    grid-column: span 2;
+    grid-column: span 1;
 
 }
 
@@ -22,7 +23,9 @@
     margin-top: 3em; 
     background-image: url('ImageLocation');
     background-size: cover; 
-    height:480px; padding-top:80px;
+    height:480px; 
+    padding-top:80px;
+    grid-column: span 1;
 }
 
 .template_3 , .post {
