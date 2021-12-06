@@ -1,0 +1,9 @@
+.form-container {
+    display:flex;
+    justify-content: left;
+    align-items: flex-start;
+}
+
+body {
+    margin-left: 3em;
+}
