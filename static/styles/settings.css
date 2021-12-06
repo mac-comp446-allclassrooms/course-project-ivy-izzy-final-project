@@ -1,6 +1,13 @@
-#logout-button {
-    background-color: #a4c3b2;
-    border-color: #a4c3b2;
+.buttons { 
+    background-color: #66afa5;
+    border:solid;
+    border-width: 2px;
+    border-color: #3D524c;
     border-radius: 35px;
+    color:white;
     width: 6em;
+}
+
+#settings-div {
+    margin-left: 2em;
 }
