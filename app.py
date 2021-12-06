@@ -28,7 +28,7 @@ class User(UserMixin, db.Model):
     pfp_placement = db.Column(db.String(), default="center")
     bio_placement = db.Column(db.String(), default="center")
     post_placement = db.Column(db.String(), default="center")
-
+    darkMode = db.Column(db.Boolean, default = False)
 
     def set_password(self,password):
         self.password_hash = generate_password_hash(password)
