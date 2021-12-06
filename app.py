@@ -64,7 +64,7 @@ class PostForm(FlaskForm):
     title = StringField('title', validators=[InputRequired(), Length(max=300)] )
 
 class EditProfileForm(FlaskForm): 
-    profile_pic_placement = RadioField('profile_pic_placement', validators=[InputRequired()], choices = ['template_1', 'template_2', 'template_3', 'template_4'])
+    profile_pic_placement = RadioField('profile_pic_placement', validators=[InputRequired()], choices = ['template1', 'template2', 'template3', 'template4'])
    
 @login_manager.user_loader
 def user_loader(user_id):
@@ -142,7 +142,8 @@ def profile2(username):
     else: 
         person = User.query.filter_by(username=username).first()
         posts= Post.query.filter_by(user_id = person.id).all()
-        return render_template("profilePage.html", title=title, profileusername=username,username=current_user.username, posts=posts)
+        pfpalignment = person.pfp_placement
+        return render_template("profilePage.html", title=title, profileusername=username,username=current_user.username, posts=posts,pfp = pfpalignment)
 
 @app.route("/settings")
 @login_required
