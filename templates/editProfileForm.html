@@ -2,10 +2,10 @@
 
 {% block content %}
 
-<body>
+<body >
     <h1 style="margin-top:3em;">Edit your Profile Page Layout :3</h1>
 
-    <div>
+    <div class="form-container">
         <form action="/update-profile" method="post">
             {{ form.hidden_tag() }}
             <label for="profile_pic_placement">Profile Pic Placement</label>
@@ -15,4 +15,7 @@
         </form>
     </div>
 </body>
+
+<link rel="stylesheet" href="styles/editProfile.css">
+
 {% endblock content %}
