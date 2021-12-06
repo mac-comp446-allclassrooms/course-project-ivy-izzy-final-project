@@ -64,10 +64,8 @@ class PostForm(FlaskForm):
     title = StringField('title', validators=[InputRequired(), Length(max=300)] )
 
 class EditProfileForm(FlaskForm): 
-    profile_pic_placement = RadioField('profile_pic_placement', validators=[InputRequired()], choices = ['template_1', 'template_2', 'template_3', 'template_4', 'template_5'])
-    bio_placement = RadioField('bio_placement', validators=[InputRequired()], choices = ['top_center', ' top_left', 'top_right'])
-    post_placement = RadioField('post_placement', validators=[InputRequired()], choices = ['top_center', 'top_left', 'top_right'])
-
+    profile_pic_placement = RadioField('profile_pic_placement', validators=[InputRequired()], choices = ['template_1', 'template_2', 'template_3', 'template_4'])
+   
 @login_manager.user_loader
 def user_loader(user_id):
     return User.query.filter_by(id=user_id).first()

@@ -9,11 +9,8 @@
         <form action="/update-profile" method="post">
             {{ form.hidden_tag() }}
             <label for="profile_pic_placement">Profile Pic Placement</label>
-            {{ form.profile_pic_placement}}
-            <label for="bio_placement">Bio Placement</label>
-            {{ form.bio_placement }}
-            <label for="post_placement">Post Placement</label>
-            {{ form.post_placement }}
+            <img class="profile-icon" src="../images/template2.png" alt="Profile picture" style="width: 33em; height:30em ;">
+            {{ form.profile_pic_placement}}        
             <input id="submit-button" type="submit" value="Submit" class="btn btn-block btn-primary">
         </form>
     </div>
