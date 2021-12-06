@@ -64,7 +64,7 @@ class PostForm(FlaskForm):
     title = StringField('title', validators=[InputRequired(), Length(max=300)] )
 
 class EditProfileForm(FlaskForm): 
-    profile_pic_placement = RadioField('profile_pic_placement', validators=[InputRequired()], choices = ['top_center', 'top_left', 'top_right', 'mid_center', 'mid_left', 'mid_right'])
+    profile_pic_placement = RadioField('profile_pic_placement', validators=[InputRequired()], choices = ['template_1', 'template_2', 'template_3', 'template_4', 'template_5'])
     bio_placement = RadioField('bio_placement', validators=[InputRequired()], choices = ['top_center', ' top_left', 'top_right'])
     post_placement = RadioField('post_placement', validators=[InputRequired()], choices = ['top_center', 'top_left', 'top_right'])
 
@@ -120,7 +120,7 @@ def homefeed():
         db.session.add(new_post)
         db.session.commit()
         postz = Post.query.filter_by(user_id = current_user.id).all()
-        return render_template("homefeed.html", title=current_user.username + title, username=username, post1 = postz)
+        return render_template("homefeed.html", title=current_user.username + "'s Homefeedho", username=username, post1 = postz)
     return render_template("homefeed.html", title=(current_user.username + title), username=username, post1=postz )
 
 # @app.route('/homefeed/<username>')
@@ -164,7 +164,7 @@ def settings2(username):
 def create(): 
     title="create post"
     form = PostForm()
-    return render_template("create.html", title=title, form=form)
+    return render_template("create.html", title=title, form=form, username=current_user.username)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
