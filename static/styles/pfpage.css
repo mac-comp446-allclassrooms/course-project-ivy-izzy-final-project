@@ -33,17 +33,17 @@
     margin-top: 3em; 
     background-image: url('ImageLocation');
     background-size: cover; 
-    height:480px; 
     padding-top:80px;
 }
 
-.template_4 , .post {
-    text-align: center; 
+.template_4 {
+    text-align: center;
     margin-top: 3em; 
     background-image: url('ImageLocation');
     background-size: cover; 
     height:480px; 
     padding-top:80px; 
+    grid-column: span 3;
 }
 
 .buttons { 
