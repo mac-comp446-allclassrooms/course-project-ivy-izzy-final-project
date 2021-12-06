@@ -155,7 +155,7 @@ def settings():
 def settings2(username): 
     title="Settings Page"
     if current_user.username == username: 
-        return render_template("settings.html", title=title, username=username)
+        return render_template("settings.html", title=title, username=username, dm =current_user.darkMode)
     return "ah ah ah this isn't your account you bootyhole"
 
 @app.route("/create")
@@ -213,3 +213,14 @@ def update_profile():
     user.post_placement = posts
     db.session.commit()
     return redirect('/profile')
+
+@app.route("/darkmode")
+@login_required
+def darkmode():
+    current_dm = current_user.darkMode
+    if current_dm:
+        current_user.darkMode = False
+    else: 
+        current_user.darkMode = True
+    db.session.commit()
+    return redirect('/settings')

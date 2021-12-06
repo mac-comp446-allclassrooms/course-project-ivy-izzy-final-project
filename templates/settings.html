@@ -1,18 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% if dm %}
 <div id="settings-div">
-    <h1 style="margin-top:3em;">&#x1F510 Settings &#x1F510</h1>
+        <h1 style="margin-top:3em;">&#x1F510 Settings &#x1F510</h1>
 
-    <button class="buttons" onclick="darkmode()">Dark Mode</button>
+        <a href="{{url_for('darkmode')}}"><button class="buttons">Dark Mode</button></a>
 
-    <script src="../scripts/main.js"></script>
+        <script src="../scripts/main.js"></script>
 
-    <link rel="stylesheet" href="../styles/settings.css" />
+        <link rel="stylesheet" href="../styles/settings.css" />
 
-    <a href="{{url_for('logout')}}"> <input class="buttons" type="submit" value="Logout"
-            class="btn btn-block btn-primary"></a>
-    <a href="{{url_for('editprofile')}}"><input class="buttons" id="edit-profile" type="submit" value="Edit Profile"
-            class="btn btn-block btn-primary"></a>
+        <a href="{{url_for('logout')}}"> <input class="buttons" type="submit" value="Logout"
+                        class="btn btn-block btn-primary"></a>
+        <a href="{{url_for('editprofile')}}"><input class="buttons" id="edit-profile" type="submit" value="Edit Profile"
+                        class="btn btn-block btn-primary"></a>
 </div>
+{% else %}
+<div id="settings-div">
+        <h1 style="background-color: red; margin-top:3em;">&#x1F510 Settings &#x1F510</h1>
+
+        <a href="{{url_for('darkmode')}}"><button class="buttons">Dark Mode</button></a>
+
+        <script src="../scripts/main.js"></script>
+
+        <link rel="stylesheet" href="../styles/settings.css" />
+
+        <a href="{{url_for('logout')}}"> <input class="buttons" type="submit" value="Logout"
+                        class="btn btn-block btn-primary"></a>
+        <a href="{{url_for('editprofile')}}"><input class="buttons" id="edit-profile" type="submit" value="Edit Profile"
+                        class="btn btn-block btn-primary"></a>
+</div>
+{% endif %}
+
 {% endblock content %}

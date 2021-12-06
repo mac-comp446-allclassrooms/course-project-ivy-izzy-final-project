@@ -4,13 +4,6 @@
 
 <h1 style="margin-top:3em;">Create A Post!</h1>
 
-<!-- <form action="/homefeed" method='POST' id="upload-podcast">
-    <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
-    Choose a file to upload: <input name="uploadedfile" type="file" onchange="readURL2(this);"/><br />
-    <img visibility=hidden id="file2" src="#" alt='image' class='hidden'/>
-    <input type="submit" value="Upload File" />
-</form> -->
-
 <form action="/homefeed" method='POST' id="upload-podcast">
     {{ form.hidden_tag() }}
     <label for="title">Title</label>
