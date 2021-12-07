@@ -8,6 +8,7 @@
     <div class="form-container">
         <form action="/update-profile" method="post">
             {{ form.hidden_tag() }}
+            {{ form. username_change }}
             <label for="profile_pic_placement">Profile Pic Placement</label>
             <img class="profile-icon" src="../images/template2.png" alt="Profile picture" style="width: 33em; height:30em ;">
             {{ form.profile_pic_placement}}        

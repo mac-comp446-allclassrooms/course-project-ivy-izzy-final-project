@@ -65,6 +65,7 @@ class PostForm(FlaskForm):
 
 class EditProfileForm(FlaskForm): 
     profile_pic_placement = RadioField('profile_pic_placement', validators=[InputRequired()], choices = ['template1', 'template2', 'template3', 'template4'])
+    username_change = StringField('username_change', validators=[InputRequired(), Length(min=4, max=15)])
    
 @login_manager.user_loader
 def user_loader(user_id):
@@ -194,12 +195,20 @@ def signup():
     return render_template('newProfile.html', form=form)
     
 
-@app.route("/editprofile", methods=["GET", "POST"])
+@app.route("/editprofile/<username>", methods=["GET", "POST"])
 @login_required
-def editprofile(): 
+def editprofile(username): 
     title="Edit your profile!!"
+
+    userInfo = db.get(username)
     form = EditProfileForm()
-    return render_template("editProfileForm.html", title=title, form=form)
+
+    if request.method=="POST": 
+        username = request.form.get('username_change')
+        db.update(id, username)
+        return redirect("/profile")
+
+    return render_template("editProfileForm.html", title=title, form=form, username = username, userInfo=userInfo)
 
 @app.route("/update-profile", methods=["GET", "POST"])
 @login_required
