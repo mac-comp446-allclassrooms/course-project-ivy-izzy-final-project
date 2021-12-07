@@ -195,20 +195,12 @@ def signup():
     return render_template('newProfile.html', form=form)
     
 
-@app.route("/editprofile/<username>", methods=["GET", "POST"])
+@app.route("/editprofile", methods=["GET", "POST"])
 @login_required
-def editprofile(username): 
+def editprofile(): 
     title="Edit your profile!!"
-
-    userInfo = db.get(username)
     form = EditProfileForm()
-
-    if request.method=="POST": 
-        username = request.form.get('username_change')
-        db.update(id, username)
-        return redirect("/profile")
-
-    return render_template("editProfileForm.html", title=title, form=form, username = username, userInfo=userInfo)
+    return render_template("editProfileForm.html", title=title, form=form)
 
 @app.route("/update-profile", methods=["GET", "POST"])
 @login_required
@@ -220,6 +212,7 @@ def update_profile():
     user.pfp_placement = pfp
     user.bio_placement = bio
     user.post_placement = posts
+    user.username = request.form.get('username_change')
     db.session.commit()
     return redirect('/profile')
 
