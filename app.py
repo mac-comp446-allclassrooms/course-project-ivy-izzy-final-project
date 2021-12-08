@@ -66,9 +66,13 @@ class PostForm(FlaskForm):
 
 class EditProfileForm(FlaskForm): 
     profile_pic_placement = RadioField('profile_pic_placement', validators=[InputRequired()], choices = ['template1', 'template2', 'template3', 'template4'])
+
+class EditUsername(FlaskForm): 
     username_change = StringField("username_change", validators=[InputRequired(), Length(min=4,max=15)])
-    bio_change = StringField("bio_change", validators=[InputRequired(), Length(min=4,max=300)])
-   
+
+class EditBio(FlaskForm):
+    bio_change = StringField("bio_change", validators=[InputRequired(), Length(min=4,max=300)])   
+
 @login_manager.user_loader
 def user_loader(user_id):
     return User.query.filter_by(id=user_id).first()
@@ -204,7 +208,7 @@ def signup():
 def editprofile(): 
     title="Edit your profile!!"
     form = EditProfileForm()
-    return render_template("editProfileForm.html", title=title, form=form)
+    return render_template("editProfileForm.html", title=title, form=form, username=current_user.username)
 
 @app.route("/update-profile", methods=["GET", "POST"])
 @login_required
@@ -216,10 +220,6 @@ def update_profile():
     user.pfp_placement = pfp
     user.bio_placement = bio
     user.post_placement = posts
-    biowords = request.form.get("bio_change")
-    username = request.form.get("username_change")
-    user.bio = biowords
-    user.username = username
     db.session.commit()
     return redirect('/profile')
 
@@ -233,3 +233,35 @@ def darkmode():
         current_user.darkMode = True
     db.session.commit()
     return redirect('/settings')
+
+@app.route("/editusername", methods=["GET", "POST"])
+@login_required
+def editusername(): 
+    title="Edit your username!!"
+    form = EditUsername()
+    return render_template("editUsername.html", title=title, form=form, username=current_user.username)
+
+@app.route("/edityourbio", methods=["GET", "POST"])
+@login_required
+def edityourbio(): 
+    title="Edit your bio!!"
+    form = EditBio()
+    return render_template("editBio.html", title=title, form=form, username=current_user.username)
+
+@app.route("/update-username", methods=["GET", "POST"])
+@login_required
+def update_username(): 
+    user = User.query.filter_by(id=current_user.id).first()
+    username = request.form.get("username_change")
+    user.username = username
+    db.session.commit()
+    return redirect('/profile')
+
+@app.route("/update-bio", methods=["GET", "POST"])
+@login_required
+def update_bio(): 
+    user = User.query.filter_by(id=current_user.id).first()
+    bio = request.form.get("bio_change")
+    user.bio = bio
+    db.session.commit()
+    return redirect('/profile')

@@ -2,24 +2,41 @@
 
 {% block content %}
 
-<body >
+<body>
     <h1 style="margin-top:3em;">Edit your Profile Page Layout :3</h1>
 
     <div class="form-container">
         <form action="/update-profile" method="post">
             {{ form.hidden_tag() }}
-            <label for="username_change">New Username</label>
-            {{ form.username_change }}
-            <label for="bio_change">New Bio</label>
-            {{ form.bio_change }}
-            <label for="profile_pic_placement">Profile Pic Placement</label>
-            <img class="profile-icon" src="../images/template2.png" alt="Profile picture" style="width: 33em; height:30em ;">
-            {{ form.profile_pic_placement}}        
-            <input id="submit-button" type="submit" value="Submit" class="btn btn-block btn-primary">
+            <div id="all-templates">
+                <div class="template-label-and-pic">
+                    <label for="template1">Template #1 </label>
+                    <img class="profile-icon" src="../images/template1.png" alt="Profile picture"
+                        style="width: 33em; height:30em ;">
+                </div>
+                <div class="template-label-and-pic">
+                    <label for="template2">Template #2 </label>
+                    <img class="profile-icon" src="../images/template2.png" alt="Profile picture"
+                        style="width: 33em; height:30em ;">
+                </div>
+                <div class="template-label-and-pic">
+                    <label for="template3">Template #3 </label>
+                    <img class="profile-icon" src="../images/template3.png" alt="Profile picture"
+                        style="width: 33em; height:30em ;">
+                </div>
+                <div class="template-label-and-pic">
+                    <label for="template4">Template #4 </label>
+                    <img class="profile-icon" src="../images/template4.png" alt="Profile picture"
+                        style="width: 33em; height:30em ;">
+                </div>
+            </div>
+            {{ form.profile_pic_placement}}
+            <input id="submit-button" style="width: 10em; margin-bottom: 2em;" type="submit" value="Submit" class="buttons btn btn-block btn-primary">
         </form>
     </div>
 </body>
 
 <link rel="stylesheet" href="styles/editProfile.css">
+<link rel="stylesheet" href="styles/settings.css">
 
 {% endblock content %}
