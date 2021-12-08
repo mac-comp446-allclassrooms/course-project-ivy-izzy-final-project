@@ -28,7 +28,8 @@ class User(UserMixin, db.Model):
     pfp_placement = db.Column(db.String(), default="center")
     bio_placement = db.Column(db.String(), default="center")
     post_placement = db.Column(db.String(), default="center")
-    darkMode = db.Column(db.Boolean, default = False)
+    bio = db.Column(db.String(), default="BIO HERE")
+    darkMode = db.Column(db.Boolean, default = True)
 
     def set_password(self,password):
         self.password_hash = generate_password_hash(password)
@@ -65,7 +66,8 @@ class PostForm(FlaskForm):
 
 class EditProfileForm(FlaskForm): 
     profile_pic_placement = RadioField('profile_pic_placement', validators=[InputRequired()], choices = ['template1', 'template2', 'template3', 'template4'])
-    username_change = StringField('username_change', validators=[InputRequired(), Length(min=4, max=15)])
+    username_change = StringField("username_change", validators=[InputRequired(), Length(min=4,max=15)])
+    bio_change = StringField("bio_change", validators=[InputRequired(), Length(min=4,max=300)])
    
 @login_manager.user_loader
 def user_loader(user_id):
@@ -139,12 +141,14 @@ def profile2(username):
         person = User.query.filter_by(username=current_user.username).first()
         posts= Post.query.filter_by(user_id = person.id).all()
         pfpalignment= person.pfp_placement
-        return render_template("profilePage.html", title=title, username=username, profileusername=username, posts=posts, pfp = pfpalignment)
+        bio = person.bio
+        return render_template("profilePage.html", title=title, username=username, profileusername=username, posts=posts, pfp = pfpalignment, bio = bio)
     else: 
         person = User.query.filter_by(username=username).first()
         posts= Post.query.filter_by(user_id = person.id).all()
         pfpalignment = person.pfp_placement
-        return render_template("profilePage.html", title=title, profileusername=username,username=current_user.username, posts=posts,pfp = pfpalignment)
+        bio = person.bio
+        return render_template("profilePage.html", title=title, profileusername=username,username=current_user.username, posts=posts,pfp = pfpalignment, bio=bio)
 
 @app.route("/settings")
 @login_required
@@ -212,7 +216,10 @@ def update_profile():
     user.pfp_placement = pfp
     user.bio_placement = bio
     user.post_placement = posts
-    user.username = request.form.get('username_change')
+    biowords = request.form.get("bio_change")
+    username = request.form.get("username_change")
+    user.bio = biowords
+    user.username = username
     db.session.commit()
     return redirect('/profile')
 
