@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect
 from flask.helpers import url_for
 from flask_sqlalchemy import SQLAlchemy
 from form import LoginForm
-from wtforms import StringField, PasswordField, BooleanField, RadioField
+from wtforms import StringField, PasswordField, BooleanField, RadioField, TextAreaField
 from wtforms.validators import InputRequired, Length
 from flask_wtf import FlaskForm 
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -61,7 +61,7 @@ class RegisterForm(FlaskForm):
     password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
 
 class PostForm(FlaskForm): 
-    content = StringField('content', validators=[InputRequired(), Length(max=2800)])
+    content = TextAreaField('content', validators=[InputRequired(), Length(max=2800)])
     title = StringField('title', validators=[InputRequired(), Length(max=300)] )
 
 class EditProfileForm(FlaskForm): 

@@ -1,3 +1,36 @@
 .hidden {
     display:none;
 }
+
+.buttons { 
+    background-color: #66afa5;
+    border:solid;
+    border-width: 2px;
+    border-color: #3D524c;
+    border-radius: 35px;
+    color:white;
+    margin-top:2em;
+}
+.form-container {
+    display:flex;
+    flex-direction: column;
+    column-gap: 2em;
+    row-gap: 1em;
+    margin-left: 2em;
+    justify-content: center;
+    align-items: center;
+}
+h1 {
+    text-align: center;
+}
+
+#input-container { 
+    display: flex;
+    width:30em;
+    flex-direction: column;
+    
+}
+
+.centering{
+    align-self: center;
+}
