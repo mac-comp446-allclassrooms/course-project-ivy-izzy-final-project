@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}     <!-- I used this website: https://stackoverflow.com/questions/17691838/range-in-jinja2-inside-a-for-loop-->           
+<a href="{{url_for('searchprofile', username=user.username)}}">
+<div class="post">
+  <div class="content">
+    <div class="pic-and-username">
+      <img class="profile-icon" src="../images/profile-icon.png" alt="Profile picture">
+      <p style="text-align: center;"class="username">{{ user.username }}</p>
+    </div>
+ 
+  </div>
+</div>
+</a>
+<script src="scripts/create.js"></script>
+
+<link rel="stylesheet" href="styles/create.css">
+
+{% endblock content %}

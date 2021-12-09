@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/homefeed.css">
-    <link rel="shortcut icon" style="border-width: 1em; border-radius: 15px;" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" style="border-width: 1em; border-radius: 15px;" href="../images/favicon.ico"
+        type="image/x-icon">
     <title>{{ title }}</title>
 </head>
 
@@ -18,10 +19,11 @@
         <div class="navbar fixed-top nav">
             <div id="logo-and-search">
                 <img class="navbar-logo" src="../images/So-tion-logo-pic.png" href="#" alt="So-tion logo" />
-                <input type="search" class="form-control" id="search-input" placeholder="Search..."
-                    aria-label="Search for..." autocomplete="off" spellcheck="false" role="combobox"
-                    aria-autocomplete="list" aria-expanded="false" aria-owns="algolia-autocomplete-listbox-0" dir="auto"
-                    style="position: relative; vertical-align: top;">
+                <form action="/search" method="POST">
+                    {{ form1.hidden_tag() }}
+                    {{ form1.searchword }}
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
             </div>
             <div id='username-block'>
                 <h4 id="username-text">&#x2728; {{username}} &#x2728;</h4>

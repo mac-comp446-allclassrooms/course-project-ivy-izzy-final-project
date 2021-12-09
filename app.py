@@ -71,7 +71,10 @@ class EditUsername(FlaskForm):
     username_change = StringField("username_change", validators=[InputRequired(), Length(min=4,max=15)])
 
 class EditBio(FlaskForm):
-    bio_change = StringField("bio_change", validators=[InputRequired(), Length(min=4,max=300)])   
+    bio_change = StringField("bio_change", validators=[InputRequired(), Length(min=4,max=300)])
+
+class SearchForm(FlaskForm): 
+    searchword = StringField("searchword",validators=[InputRequired(), Length(min=4,max=15)])   
 
 @login_manager.user_loader
 def user_loader(user_id):
@@ -114,6 +117,7 @@ def whoisuser():
 @app.route('/homefeed', methods=['POST', "GET"])
 @login_required
 def homefeed():
+    form1 = SearchForm()
     title="'s Homefeed"
     username = current_user.username
     postz = Post.query.filter_by(user_id = current_user.id).all()
@@ -125,8 +129,8 @@ def homefeed():
         db.session.add(new_post)
         db.session.commit()
         postz = Post.query.filter_by(user_id = current_user.id).all()
-        return render_template("homefeed.html", title=current_user.username + "'s Homefeedho", username=username, post1 = postz)
-    return render_template("homefeed.html", title=(current_user.username + title), username=username, post1=postz )
+        return render_template("homefeed.html", title=current_user.username + "'s Homefeedho", username=username, post1 = postz, form1=form1)
+    return render_template("homefeed.html", title=(current_user.username + title), username=username, post1=postz, form1=form1 )
 
 # @app.route('/homefeed/<username>')
 # @login_required
@@ -141,18 +145,20 @@ def profile():
 @login_required
 def profile2(username): 
     title="Profile Page"
+    form1 = SearchForm()
+
     if current_user.username == username: 
         person = User.query.filter_by(username=current_user.username).first()
         posts= Post.query.filter_by(user_id = person.id).all()
         pfpalignment= person.pfp_placement
         bio = person.bio
-        return render_template("profilePage.html", title=title, username=username, profileusername=username, posts=posts, pfp = pfpalignment, bio = bio)
+        return render_template("profilePage.html", title=title, username=username, profileusername=username, posts=posts, pfp = pfpalignment, bio = bio, form1=form1)
     else: 
         person = User.query.filter_by(username=username).first()
         posts= Post.query.filter_by(user_id = person.id).all()
         pfpalignment = person.pfp_placement
         bio = person.bio
-        return render_template("profilePage.html", title=title, profileusername=username,username=current_user.username, posts=posts,pfp = pfpalignment, bio=bio)
+        return render_template("profilePage.html", title=title, profileusername=username,username=current_user.username, posts=posts,pfp = pfpalignment, bio=bio, form1=form1)
 
 @app.route("/settings")
 @login_required
@@ -163,8 +169,9 @@ def settings():
 @login_required
 def settings2(username): 
     title="Settings Page"
+    form1 = SearchForm()
     if current_user.username == username: 
-        return render_template("settings.html", title=title, username=username, dm =current_user.darkMode)
+        return render_template("settings.html", title=title, username=username, dm =current_user.darkMode, form1=form1)
     return "ah ah ah this isn't your account you bootyhole"
 
 @app.route("/create")
@@ -172,7 +179,9 @@ def settings2(username):
 def create(): 
     title="create post"
     form = PostForm()
-    return render_template("create.html", title=title, form=form, username=current_user.username)
+    form1 = SearchForm()
+
+    return render_template("create.html", title=title, form=form, username=current_user.username, form1=form1)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -180,7 +189,7 @@ def signup():
     if current_user.is_authenticated:
         return redirect('/homefeed')
     form = RegisterForm()
-
+    form1 = SearchForm()
     if form.validate_on_submit():
         username = request.form.get("username")
         password = request.form.get('password')
@@ -199,16 +208,17 @@ def signup():
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user)
-            return render_template("homefeed.html", title=current_user.username + "'s homefeed", username=username )
+            return render_template("homefeed.html", title=current_user.username + "'s homefeed", username=username,form1=form1 )
     return render_template('newProfile.html', form=form)
     
 
 @app.route("/editprofile", methods=["GET", "POST"])
 @login_required
 def editprofile(): 
+    form1 = SearchForm()
     title="Edit your profile!!"
     form = EditProfileForm()
-    return render_template("editProfileForm.html", title=title, form=form, username=current_user.username)
+    return render_template("editProfileForm.html", title=title, form=form, username=current_user.username, form1=form1)
 
 @app.route("/update-profile", methods=["GET", "POST"])
 @login_required
@@ -237,16 +247,18 @@ def darkmode():
 @app.route("/editusername", methods=["GET", "POST"])
 @login_required
 def editusername(): 
+    form1 = SearchForm()
     title="Edit your username!!"
     form = EditUsername()
-    return render_template("editUsername.html", title=title, form=form, username=current_user.username)
+    return render_template("editUsername.html", title=title, form=form, username=current_user.username, form1=form1)
 
 @app.route("/edityourbio", methods=["GET", "POST"])
 @login_required
 def edityourbio(): 
+    form1 = SearchForm()
     title="Edit your bio!!"
     form = EditBio()
-    return render_template("editBio.html", title=title, form=form, username=current_user.username)
+    return render_template("editBio.html", title=title, form=form, username=current_user.username, form1=form1)
 
 @app.route("/update-username", methods=["GET", "POST"])
 @login_required
@@ -265,3 +277,18 @@ def update_bio():
     user.bio = bio
     db.session.commit()
     return redirect('/profile')
+
+@app.route('/search', methods=["POST", "GET"])
+@login_required
+def searchdb(): 
+    form1 = SearchForm()
+    formword = request.form.get('searchword')
+    user = User.query.filter_by(username=str(formword)).first()
+    if user: 
+        return render_template("showSearch.html", user = user, username = current_user.username, form1=form1)
+    return render_template("showNoPeople.html", form1=form1, username= current_user.username)
+
+@app.route('/searchprofile/<username>')
+@login_required
+def searchprofile(username): 
+    return redirect('/profile/' + username)
