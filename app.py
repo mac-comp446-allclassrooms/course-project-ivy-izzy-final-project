@@ -301,3 +301,14 @@ def clickedpost(id):
     post_user = User.query.filter_by(id=postz.user_id).first()
 
     return render_template('clickedpost.html', form1=form1, username = current_user.username, postz = postz, post_user=post_user)
+
+@app.route('/deleteaccount')
+@login_required
+def deleteaccount(): 
+    user = User.query.filter_by(id = current_user.id).first()
+    posts = Post.query.filter_by(user_id = current_user.id).all()
+    for post in posts: 
+        db.session.delete(post)
+    db.session.delete(user)
+    db.session.commit()
+    return redirect('/')
