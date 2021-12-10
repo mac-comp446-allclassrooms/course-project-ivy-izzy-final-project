@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 style="padding-top: 1em;padding-bottom: 1em; color: white; background-color: #3D524c; border-radius: 3em; margin: 3em; display:flex; justify-content: center;">Are you sure you want to delete your account? &#x1F449;&#x1F448; &#x1F97A;</h1>
+<div style="display: flex; justify-content:center; column-gap: 2em; margin-top:2em; font-size: xx-large;">
+    <a href="{{url_for('deleteaccount')}}"><input class="buttons" id="edit-profile" type="submit" value="Yes"
+            class="btn btn-block btn-primary"></a>
+    <a href="{{url_for('settings')}}"><input class="buttons" id="edit-username" type="submit" value="No"
+            class="btn btn-block btn-primary"></a>
+</div>
+
+<link rel="stylesheet" href="../styles/settings.css" />
+
+{% endblock content %}

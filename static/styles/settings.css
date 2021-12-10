@@ -5,9 +5,15 @@
     border-color: #3D524c;
     border-radius: 35px;
     color:white;
-    width: 6em;
+    width: fit-content;
 }
 
 #settings-div {
     margin-left: 2em;
+}
+
+#set-buttons {
+    display:flex;
+    flex-direction: column;
+    row-gap: 2em;
 }

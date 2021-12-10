@@ -312,3 +312,10 @@ def deleteaccount():
     db.session.delete(user)
     db.session.commit()
     return redirect('/')
+
+@app.route('/deleteconfirm')
+@login_required
+def deleteconfirm(): 
+    form1 = SearchForm()
+    title = "Confirm Account Delete"
+    return render_template('deleteConfirm.html', title=title, form1=form1, username = current_user.username)
