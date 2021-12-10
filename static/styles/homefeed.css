@@ -137,3 +137,24 @@ body {
     border-radius: 6px;
     color:#a5e1d9;
 }
+
+.search-button {
+    background-color: #66afa5;
+    border:solid;
+    border-width: 2px;
+    border-color: #3D524c;
+    border-radius: 35px;
+    color:white;
+}
+form {
+    display: flex;
+    align-items: center;
+    column-gap: 1em;
+}
+
+.form-control{
+    border-radius: 1em;
+    padding-left: 1em;
+    border-color: #66afa5;
+    border-width: 2px;
+}

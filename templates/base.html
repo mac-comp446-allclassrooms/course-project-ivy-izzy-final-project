@@ -21,8 +21,8 @@
                 <img class="navbar-logo" src="../images/So-tion-logo-pic.png" href="#" alt="So-tion logo" />
                 <form action="/search" method="POST">
                     {{ form1.hidden_tag() }}
-                    {{ form1.searchword }}
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    {{ form1.searchword(class_="form-control") }}
+                    <button type="submit" class="search-button btn btn-primary">Search</button>
                 </form>
             </div>
             <div id='username-block'>

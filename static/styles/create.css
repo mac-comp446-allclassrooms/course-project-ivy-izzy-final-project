@@ -34,3 +34,25 @@ h1 {
 .centering{
     align-self: center;
 }
+
+#bear {
+    display:flex;
+    justify-content: center;
+    
+}
+h3 {
+    margin-top: 5em; 
+    display: flex; 
+    justify-content: center; 
+    color:white; 
+    background-color: #3D524c; 
+    padding: 1em;
+    border-radius: 2em; 
+    margin-left: 5em;
+    margin-right: 5em;
+}
+#image-bear {
+    width: 500px;
+    height:450px;
+    border-radius: 2em;
+}

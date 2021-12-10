@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
-{% block content %}     <!-- I used this website: https://stackoverflow.com/questions/17691838/range-in-jinja2-inside-a-for-loop-->           
+{% block content %}
+<!-- I used this website: https://stackoverflow.com/questions/17691838/range-in-jinja2-inside-a-for-loop-->
 
-<h3 style="margin-top: 5em; display: flex; justify-content: center; color:white; background-color: #3D524c; padding: 1em; border-radius: 2em; margin: 5em;">Sorry! There are no people with that username ¯\_(ツ)_/¯</h3>
-
-<link rel="stylesheet" href="styles/create.css">
+<h3>Sorry! There are no people with that username ¯\_(ツ)_/¯</h3>
+<div id="bear">
+    <img id="image-bear" src="../images/bear.gif" alt="profile icon button" />
+</div>
+<link rel="stylesheet" href="../styles/create.css">
 
 {% endblock content %}
