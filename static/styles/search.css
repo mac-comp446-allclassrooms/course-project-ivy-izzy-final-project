@@ -1,0 +1,14 @@
+.post{
+    justify-content: center;
+    /* padding-right: 1em; */
+    background-color: #66afa5;
+    margin-left: 5em;
+    margin-right: 5em;
+    margin-top: 10em;
+    border-radius: 1em;
+
+}
+
+.profile-icon {
+    margin-left: 2em;
+}

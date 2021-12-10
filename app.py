@@ -292,3 +292,12 @@ def searchdb():
 @login_required
 def searchprofile(username): 
     return redirect('/profile/' + username)
+
+@app.route('/clickedpost/<id>', methods=["GET"])
+@login_required
+def clickedpost(id): 
+    form1 = SearchForm()
+    postz = Post.query.filter_by(id = id).first()
+    post_user = User.query.filter_by(id=postz.user_id).first()
+
+    return render_template('clickedpost.html', form1=form1, username = current_user.username, postz = postz, post_user=post_user)

@@ -41,6 +41,7 @@
 
 {% for post in posts %}
 <!-- I used this website: https://stackoverflow.com/questions/17691838/range-in-jinja2-inside-a-for-loop-->
+<a href="{{url_for('clickedpost', id=post.id)}}">
 <div >
     <div class="content">
         <div class="pic-and-username">
@@ -55,6 +56,7 @@
         </div>
     </div>
 </div>
+</a>
 {% endfor %}
 </div>
 

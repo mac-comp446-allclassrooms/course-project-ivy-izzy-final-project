@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
-{% block content %}     <!-- I used this website: https://stackoverflow.com/questions/17691838/range-in-jinja2-inside-a-for-loop-->           
+{% block content %}     <!-- I used this website: https://stackoverflow.com/questions/17691838/range-in-jinja2-inside-a-for-loop-->
+<link rel="stylesheet" href="styles/search.css">           
 <a href="{{url_for('searchprofile', username=user.username)}}">
 <div class="post">
   <div class="content">
     <div class="pic-and-username">
       <img class="profile-icon" src="../images/profile-icon.png" alt="Profile picture">
-      <p style="text-align: center;"class="username">{{ user.username }}</p>
+      <h2><p style="text-align: center;"class="username">{{ user.username }}</p></h2>
     </div>
- 
   </div>
 </div>
 </a>
