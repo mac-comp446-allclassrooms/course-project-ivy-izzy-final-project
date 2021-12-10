@@ -121,7 +121,8 @@ def homefeed():
     form1 = SearchForm()
     title="'s Homefeed"
     username = current_user.username
-    postz = Post.query.filter_by(user_id = current_user.id).all()
+    postz = Post.query.all()
+    tenposts = postz[-10:]
     if request.method == "POST": 
         content = request.form.get("content")
         title = request.form.get("title")
@@ -129,9 +130,10 @@ def homefeed():
         new_post = Post(user_id = user_id, post_content = content, post_title=title, profile_pic = False, post_username = current_user.username)
         db.session.add(new_post)
         db.session.commit()
-        postz = Post.query.filter_by(user_id = current_user.id).all()
-        return render_template("homefeed.html", title=current_user.username + "'s Homefeed", username=username, post1 = postz, form1=form1)
-    return render_template("homefeed.html", title=(current_user.username + title), username=username, post1=postz, form1=form1 )
+        postz = Post.query.all()
+        tenposts = postz[-10:]
+        return render_template("homefeed.html", title=current_user.username + "'s Homefeed", username=username, post1 = reversed(tenposts), form1=form1)
+    return render_template("homefeed.html", title=(current_user.username + title), username=username, post1=reversed(tenposts), form1=form1 )
 
 
 @app.route("/profile")
