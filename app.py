@@ -152,13 +152,13 @@ def profile2(username):
         posts= Post.query.filter_by(user_id = person.id).all()
         pfpalignment= person.pfp_placement
         bio = person.bio
-        return render_template("profilePage.html", title=title, username=username, profileusername=username, posts=posts, pfp = pfpalignment, bio = bio, form1=form1)
+        return render_template("profilePage.html", title=title, username=username, profileusername=username, posts=reversed(posts), pfp = pfpalignment, bio = bio, form1=form1)
     else: 
         person = User.query.filter_by(username=username).first()
         posts= Post.query.filter_by(user_id = person.id).all()
         pfpalignment = person.pfp_placement
         bio = person.bio
-        return render_template("profilePage.html", title=title, profileusername=username,username=current_user.username, posts=posts,pfp = pfpalignment, bio=bio, form1=form1)
+        return render_template("profilePage.html", title=title, profileusername=username,username=current_user.username, posts=reversed(posts),pfp = pfpalignment, bio=bio, form1=form1)
 
 @app.route("/settings")
 @login_required

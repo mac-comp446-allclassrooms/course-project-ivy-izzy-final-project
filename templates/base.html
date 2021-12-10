@@ -18,7 +18,9 @@
     <nav class="fixed-top">
         <div class="navbar fixed-top nav">
             <div id="logo-and-search">
-                <img class="navbar-logo" src="../images/So-tion-logo-pic.png" href="#" alt="So-tion logo" />
+                <a href="{{ url_for('homefeed') }}">
+                    <img class="navbar-logo" src="../images/So-tion-logo-pic.png" href="#" alt="So-tion logo" />
+                </a>
                 <form action="/search" method="POST">
                     {{ form1.hidden_tag() }}
                     {{ form1.searchword(class_="form-control") }}
