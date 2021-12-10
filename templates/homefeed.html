@@ -1,23 +1,7 @@
 {% extends "base.html" %}
-
 {% block content %}
 <link rel="stylesheet" href="styles/homefeed.css">
-
-  <!--Eventually this will be ~~**Dynamically Generated**~~ Content-->
-  <div class="post">
-    <div class="content">
-      <div class="pic-and-username">
-        <img class="profile-icon" src="../images/profile-icon.png" alt="Profile picture">
-        <p style="text-align: center;"class="username">{{ username }}</p>
-      </div>
-      <div class="content-and-comments">
-        <img src="../images/fake-content.jpeg" alt="image">
-        <div class="comments">
-
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- ~~**Dynamically Generated**~~ Post Content -->
   {% for post in post1 %}     <!-- I used this website: https://stackoverflow.com/questions/17691838/range-in-jinja2-inside-a-for-loop-->           
   <div class="post">
     <div class="content">
@@ -29,29 +13,9 @@
         <h2> {{ post.post_title }}</h2>
         <p> {{ post.post_content }}</p>
         <div class="comments">
-
         </div>
       </div>
     </div>
   </div>
 {% endfor %}
- 
-
-  <div class="post">
-    <div class="content">
-      <div class="pic-and-username">
-        <img class="profile-icon" src="../images/profile-icon.png" alt="Profile picture">
-        <p class="username">{{ username }}</p>
-      </div>
-      <div class="content-and-comments">
-        <div class="title-and-recording">
-        <label class="audio-title" for="recording">Snippet of The Hunting Party Audio book </label>
-        <audio name="recording" src="../images/podcastRecoding.m4a" type="audio/x-m4a" controls> 
-        </div>
-        <div class="comments">
-        </div>
-      </div>
-    </div>
-  </div>
-
 {% endblock content %}

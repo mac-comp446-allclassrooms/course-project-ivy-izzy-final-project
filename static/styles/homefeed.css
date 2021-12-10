@@ -158,3 +158,13 @@ form {
     border-color: #66afa5;
     border-width: 2px;
 }
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color:#3D524c;
+    text-decoration: none;
+}
