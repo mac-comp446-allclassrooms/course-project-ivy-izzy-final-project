@@ -49,6 +49,7 @@ class Post(db.Model):
     post_title = db.Column(db.String(300), unique=False)
     post_content = db.Column(db.String(2800), unique=False) 
     profile_pic = db.Column(db.Boolean, default=False)  
+    post_username = db.Column(db.String(30))
 
 class LoginForm(FlaskForm):
     username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
@@ -125,16 +126,13 @@ def homefeed():
         content = request.form.get("content")
         title = request.form.get("title")
         user_id = current_user.id
-        new_post = Post(user_id = user_id, post_content = content, post_title=title, profile_pic = False)
+        new_post = Post(user_id = user_id, post_content = content, post_title=title, profile_pic = False, post_username = current_user.username)
         db.session.add(new_post)
         db.session.commit()
         postz = Post.query.filter_by(user_id = current_user.id).all()
-        return render_template("homefeed.html", title=current_user.username + "'s Homefeedho", username=username, post1 = postz, form1=form1)
+        return render_template("homefeed.html", title=current_user.username + "'s Homefeed", username=username, post1 = postz, form1=form1)
     return render_template("homefeed.html", title=(current_user.username + title), username=username, post1=postz, form1=form1 )
 
-# @app.route('/homefeed/<username>')
-# @login_required
-# def homefeed2(username):
 
 @app.route("/profile")
 @login_required
