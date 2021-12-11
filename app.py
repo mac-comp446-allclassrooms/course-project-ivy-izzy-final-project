@@ -66,7 +66,7 @@ class PostForm(FlaskForm):
     title = StringField('title', validators=[InputRequired(), Length(max=300)] )
 
 class EditProfileForm(FlaskForm): 
-    profile_pic_placement = RadioField('profile_pic_placement', validators=[InputRequired()], choices = ['template1', 'template2', 'template3', 'template4'])
+    profile_pic_placement = RadioField('profile_pic_placement', validators=[InputRequired()], choices = ['template1', 'template2', 'template3', 'template4', 'template5', 'template6'])
 
 class EditUsername(FlaskForm): 
     username_change = StringField("username_change", validators=[InputRequired(), Length(min=4,max=15)])

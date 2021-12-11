@@ -46,6 +46,26 @@
     grid-column: span 3;
 }
 
+.template_5 {
+    text-align: left;
+    margin-top: 3em; 
+    background-image: url('ImageLocation');
+    background-size: cover; 
+    height:480px; 
+    padding-top:80px; 
+    grid-column: span 3;
+}
+
+.template_6 {
+    text-align: right;
+    margin-top: 3em; 
+    background-image: url('ImageLocation');
+    background-size: cover; 
+    height:480px; 
+    padding-top:80px; 
+    grid-column: span 3;
+}
+
 .buttons { 
     background-color: #66afa5;
     border:solid;
