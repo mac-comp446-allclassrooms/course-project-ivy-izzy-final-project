@@ -1,23 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
 <link rel="stylesheet" href="styles/homefeed.css">
-  <!-- ~~**Dynamically Generated**~~ Post Content -->
-  {% for post in post1 %}     <!-- I used this website: https://stackoverflow.com/questions/17691838/range-in-jinja2-inside-a-for-loop-->           
-  <div class="post">
-    <div class="content">
-      <a href="{{url_for('searchprofile', username=post.post_username)}}">
+<!-- ~~**Dynamically Generated**~~ Post Content -->
+{% for post in post1 %}
+<!-- I used this website: https://stackoverflow.com/questions/17691838/range-in-jinja2-inside-a-for-loop-->
+<div class="post">
+  <div class="content">
+    <a href="{{url_for('searchprofile', username=post.post_username)}}">
       <div class="pic-and-username">
         <img class="profile-icon" src="../images/profile-icon.png" alt="Profile picture">
-        <p style="text-align: center;"class="username">{{ post.post_username }}</p>
+        <p style="text-align: center;" class="username">{{ post.post_username }}</p>
       </div>
     </a>
-      <div class="content-and-comments">
-        <h2> {{ post.post_title }}</h2>
-        <p> {{ post.post_content }}</p>
-        <div class="comments">
-        </div>
+    <div class="content-and-comments">
+      <h2> {{ post.post_title }}</h2>
+      <p> {{ post.post_content }}</p>
+      <div class="comments">
       </div>
     </div>
   </div>
+</div>
 {% endfor %}
 {% endblock content %}

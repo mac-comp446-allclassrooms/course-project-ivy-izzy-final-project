@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 id= "checking">Are you sure you want to delete your account? &#x1F449;&#x1F448; &#x1F97A;</h1>
-<div id = delete>
-    <a href="{{url_for('deleteaccount')}}"><input class="buttons" id="edit-profile" type="submit" value="Yes"
-            class="btn btn-block btn-primary"></a>
-    <a href="{{url_for('settings')}}"><input class="buttons" id="edit-username" type="submit" value="No"
-            class="btn btn-block btn-primary"></a>
+<h1 id="checking">Are you sure you want to delete your account? &#x1F449;&#x1F448; &#x1F97A;</h1>
+<div id=delete>
+        <a href="{{url_for('deleteaccount')}}"><input class="buttons" id="edit-profile" type="submit" value="Yes"
+                        class="btn btn-block btn-primary"></a>
+        <a href="{{url_for('settings')}}"><input class="buttons" id="edit-username" type="submit" value="No"
+                        class="btn btn-block btn-primary"></a>
 </div>
 
 <link rel="stylesheet" href="../styles/settings.css" />

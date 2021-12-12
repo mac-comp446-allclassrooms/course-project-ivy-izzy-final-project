@@ -2,21 +2,18 @@
 
 {% block content %}
 <div class='form-container'>
-<h1 style="margin-top:3em;">Create A Post!</h1>
+    <h1 style="margin-top:3em;">Create A Post!</h1>
 
-<form action="/update-pfp" method='POST' id="upload-podcast" enctype="multipart/form-data">
-    {{ form.hidden_tag() }}
-    <div id="input-container">
-    <label class="centering" for="title">Upload a Profile Pic</label>
-    {{ form.profilepic.file.filename }}
-    <input id="signup-button" style="align-self: center;width:10em; margin-bottom: 2em;" type="submit" value="Submit post :)" class="centering buttons btn btn-block btn-primary">
-</div>
+    <form action="/update-pfp" method='POST' id="upload-podcast" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div id="input-container">
+            <label class="centering" for="title">Upload a Profile Pic</label>
+            {{ form.profilepic.file.filename }}
+            <input id="signup-button" style="align-self: center;width:10em; margin-bottom: 2em;" type="submit"
+                value="Submit post :)" class="centering buttons btn btn-block btn-primary">
+        </div>
 </div>
 </form>
-
-<!-- <input type='file' onchange="readURL(this);"  id="upload-photo"/>
-    <img visibility=hidden id="blah" src="#" alt='image' class='hidden'/> -->
-
 <script src="scripts/create.js"></script>
 
 <link rel="stylesheet" href="styles/create.css">
