@@ -3,12 +3,10 @@
 {% block content %}
 <h1 id="checking">Are you sure you want to delete your account? &#x1F449;&#x1F448; &#x1F97A;</h1>
 <div id=delete>
-        <a href="{{url_for('deleteaccount')}}"><input class="buttons" id="edit-profile" type="submit" value="Yes"
-                        class="btn btn-block btn-primary"></a>
-        <a href="{{url_for('settings')}}"><input class="buttons" id="edit-username" type="submit" value="No"
-                        class="btn btn-block btn-primary"></a>
+        <a href="{{url_for('deleteaccount')}}"><button id="edit-profile" type="submit" value="Yes"
+                        class="buttons btn btn-block btn-primary">Yes</button></a>
+        <a href="{{url_for('settings')}}"><button id="edit-username" type="submit" value="No"
+                        class="buttons btn btn-block btn-primary">No </button></a>
 </div>
-
 <link rel="stylesheet" href="../styles/settings.css" />
-
 {% endblock content %}

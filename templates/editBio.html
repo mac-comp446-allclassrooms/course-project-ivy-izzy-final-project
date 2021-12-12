@@ -1,20 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
+<h1 id="edit-bio-title">Edit your Bio :3</h1>
 
-<body>
-    <h1 id="edit-bio-title">Edit your Bio :3</h1>
+<div class="form-container">
+    <form action="/update-bio" method="post">
+        {{ form.hidden_tag() }}
+        <label>New Bio</label>
+        {{ form.bio_change }}
+        <input id="submit-button" type="submit" value="Submit" class="buttons btn btn-block btn-primary">
+    </form>
+</div>
 
-    <div class="form-container">
-        <form action="/update-bio" method="post">
-            {{ form.hidden_tag() }}
-            <label for="bio_change">New Bio</label>
-            {{ form.bio_change }}
-            <input id="submit-button" type="submit" value="Submit" class="buttons btn btn-block btn-primary">
-        </form>
-    </div>
-</body>
-
-<link rel="stylesheet" href="styles/editProfile.css">
+<link rel="stylesheet" href="styles/editProfile.css" />
 
 {% endblock content %}
