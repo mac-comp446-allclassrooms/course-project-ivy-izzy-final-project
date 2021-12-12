@@ -19,7 +19,7 @@
         <div class="navbar fixed-top nav">
             <div id="logo-and-search">
                 <a href="{{ url_for('homefeed') }}">
-                    <img class="navbar-logo" src="../images/So-tion-logo-pic.png" href="#" alt="So-tion logo" />
+                    <img class="navbar-logo" src="../images/So-tion-logo-pic.png" alt="So-tion logo" />
                 </a>
                 <form action="/search" method="POST">
                     {{ form1.hidden_tag() }}
@@ -37,7 +37,7 @@
                     <img class="home-navbar" src="../images/home.jpg" href="{{ url_for('homefeed') }}"
                         alt="Home button" /></a>
                 <a href="{{ url_for('settings') }}">
-                    <img class="gear-navbar" src="../images/gear.png" href="#" alt="Gear button" /></a>
+                    <img class="gear-navbar" src="../images/gear.png" alt="Gear button" /></a>
             </div>
         </div>
         <div class="navbar-divider nav"></div>
