@@ -13,3 +13,7 @@ Info about your project goes here
 Info about your project goes here
 
 
+## Acknowledgements: 
+- Joslenne Peña, our professor at Macalester College, fall 2021
+- The youtuber-> pretty printed. We used the following tutorials:
+- https://www.youtube.com/watch?v=2dEM-s3mRLE
