@@ -1,13 +1,9 @@
-from os import error
 from flask import Flask, render_template, request, redirect
-from flask.helpers import url_for
 from flask_sqlalchemy import SQLAlchemy
 from form import LoginForm
-from wtforms import StringField, PasswordField, BooleanField, RadioField, TextAreaField
-from wtforms.validators import InputRequired, Length
-from flask_wtf import FlaskForm 
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from forms import LoginForm, PostForm, RegisterForm, EditBio, EditProfileForm, EditUsername, SearchForm
 
 app = Flask(__name__, static_url_path='')
 
@@ -43,31 +39,7 @@ class Post(db.Model):
     profile_pic = db.Column(db.Boolean, default=False)  
     post_username = db.Column(db.String(30))
 
-class LoginForm(FlaskForm):
-    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
-    password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
-    remember = BooleanField('remember me')
-
-class RegisterForm(FlaskForm):
-    email = StringField('email', validators=[InputRequired(), Length(max=50)])
-    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
-    password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
-
-class PostForm(FlaskForm): 
-    content = TextAreaField('content', validators=[InputRequired(), Length(max=2800)])
-    title = StringField('title', validators=[InputRequired(), Length(max=300)] )
-
-class EditProfileForm(FlaskForm): 
-    profile_pic_placement = RadioField('profile_pic_placement', validators=[InputRequired()], choices = ['template1', 'template2', 'template3', 'template4', 'template5', 'template6'])
-
-class EditUsername(FlaskForm): 
-    username_change = StringField("username_change", validators=[InputRequired(), Length(min=4,max=15)])
-
-class EditBio(FlaskForm):
-    bio_change = StringField("bio_change", validators=[InputRequired(), Length(min=4,max=300)])
-
-class SearchForm(FlaskForm): 
-    searchword = StringField("searchword",validators=[InputRequired(), Length(min=4,max=15)])   
+   
 
 @login_manager.user_loader
 def user_loader(user_id):
@@ -83,6 +55,8 @@ def index():
         username = request.form.get("username")
         password = request.form.get('password')
         user = User.query.filter_by(username=username).first()
+        if user is None: 
+            return '<h1>There is no account associated with that username</h1>'
         usernamesmatch = user.username == username
         passwordsmatch = user.check_password(password)
         if usernamesmatch and passwordsmatch:
