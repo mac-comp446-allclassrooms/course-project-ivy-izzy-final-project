@@ -31,3 +31,7 @@ body {
     color:white;
     width: 6em;
 }
+
+#edit-bio-title {
+    margin-top:3em;
+}

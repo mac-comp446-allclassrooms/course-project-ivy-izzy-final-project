@@ -168,3 +168,7 @@ a:hover {
     color:#3D524c;
     text-decoration: none;
 }
+
+.username {
+    text-align: center;
+}
