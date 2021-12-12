@@ -26,8 +26,6 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String())
     is_authenticated = db.Column(db.Boolean, default=False)
     pfp_placement = db.Column(db.String(), default="center")
-    bio_placement = db.Column(db.String(), default="center")
-    post_placement = db.Column(db.String(), default="center")
     bio = db.Column(db.String(), default="BIO HERE")
     darkMode = db.Column(db.Boolean, default = True)
 
@@ -36,12 +34,6 @@ class User(UserMixin, db.Model):
      
     def check_password(self,password):
         return check_password_hash(self.password_hash,password)
-
-    def setUsername(self,username):
-        self.username = username
-    
-    def setEmail(self, email): 
-        self.email = email
 
 class Post(db.Model): 
     id = db.Column(db.Integer, primary_key=True)
@@ -224,12 +216,8 @@ def editprofile():
 @login_required
 def update_profile(): 
     pfp = request.form.get('profile_pic_placement')
-    posts = request.form.get('post_placement')
-    bio = request.form.get("bio_placement")
     user = User.query.filter_by(id=current_user.id).first()
     user.pfp_placement = pfp
-    user.bio_placement = bio
-    user.post_placement = posts
     db.session.commit()
     return redirect('/profile')
 
