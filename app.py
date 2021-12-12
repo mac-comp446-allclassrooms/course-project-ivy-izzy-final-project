@@ -6,7 +6,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from forms import LoginForm, PostForm, RegisterForm, EditBio, EditProfileForm, EditUsername, SearchForm
 
 app = Flask(__name__, static_url_path='')
-
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///login.db'
 app.config['SECRET_KEY'] = 'thisissecret'
 db = SQLAlchemy(app)
@@ -15,6 +14,11 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+# For understanding database structure, we used this article:
+# https://www.techopedia.com/definition/25122/one-to-many-relationship
+# For login sessions we used these websites: 
+# https://flask-login.readthedocs.io/en/latest/
+# https://www.askpython.com/python-modules/flask/flask-user-authentication
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(75), unique=True)
@@ -38,8 +42,6 @@ class Post(db.Model):
     post_content = db.Column(db.String(2800), unique=False) 
     profile_pic = db.Column(db.Boolean, default=False)  
     post_username = db.Column(db.String(30))
-
-   
 
 @login_manager.user_loader
 def user_loader(user_id):
