@@ -32,3 +32,6 @@ Info about your project goes here
 - For login sessions we used these websites: 
 - https://flask-login.readthedocs.io/en/latest/
 - https://www.askpython.com/python-modules/flask/flask-user-authentication
+- bear waving gif: https://www.google.com/url?sa=i&url=https%3A%2F%2Ftenor.com%2Fsearch%2Fwaving-bear-gifs&psig=AOvVaw2xuE4IQUv_NUfjZ9ARomVW&ust=1639440755791000&source=images&cd=vfe&ved=0CAwQjhxqFwoTCLDC2vC-3_QCFQAAAAAdAAAAABAD
+- wireframes were created using https://wireframepro.mockflow.com/
+- logo was made using https://canva.com
