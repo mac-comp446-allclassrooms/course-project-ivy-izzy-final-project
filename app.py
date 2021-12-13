@@ -151,7 +151,6 @@ def create():
     title="create post"
     form = PostForm()
     form1 = SearchForm()
-
     return render_template("create.html", title=title, form=form, username=current_user.username, form1=form1)
 
 
@@ -179,7 +178,9 @@ def signup():
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user)
-            return render_template("homefeed.html", title=current_user.username + "'s homefeed", username=username,form1=form1 )
+            postz = Post.query.all()
+            tenposts = postz[-10:]
+            return render_template("homefeed.html", title=current_user.username + "'s homefeed", username=username, form1=form1, post1=reversed(tenposts) )
     return render_template('newProfile.html', form=form)
     
 
