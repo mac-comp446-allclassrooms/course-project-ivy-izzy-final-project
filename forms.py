@@ -1,8 +1,10 @@
-from form import LoginForm
 from wtforms import StringField, PasswordField, BooleanField, RadioField, TextAreaField
 from wtforms.validators import InputRequired, Length
 from flask_wtf import FlaskForm 
-from werkzeug.security import generate_password_hash, check_password_hash
+
+# Authors: Izzy Valdivia & Ivy Contreras
+# Used this website to create the forms and use them in the corresponding html files:
+#  https://flask-wtf.readthedocs.io/en/1.0.x/
 
 class LoginForm(FlaskForm):
     username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])

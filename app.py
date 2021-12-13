@@ -5,6 +5,8 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from werkzeug.security import generate_password_hash, check_password_hash
 from forms import LoginForm, PostForm, RegisterForm, EditBio, EditProfileForm, EditUsername, SearchForm
 
+# Authors: Izzy Valdivia & Ivy Contreras
+
 app = Flask(__name__, static_url_path='')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///login.db'
 app.config['SECRET_KEY'] = 'thisissecret'
@@ -19,6 +21,7 @@ login_manager.init_app(app)
 # For login sessions we used these websites: 
 # https://flask-login.readthedocs.io/en/latest/
 # https://www.askpython.com/python-modules/flask/flask-user-authentication
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(75), unique=True)
