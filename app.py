@@ -1,16 +1,25 @@
+@@ -1,299 +1,299 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+
+import os 
 from form import LoginForm
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from forms import LoginForm, PostForm, RegisterForm, EditBio, EditProfileForm, EditUsername, SearchForm
+import psycopg2
 
 # Authors: Izzy Valdivia & Ivy Contreras
 
 app = Flask(__name__, static_url_path='')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///login.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///login.db'
+# app.config['SECRET_KEY'] = 'thisissecret'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://sotion-person:password@localhost/sotion-dev'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["DATABASE_URL"]
 app.config['SECRET_KEY'] = 'thisissecret'
 db = SQLAlchemy(app)
+# conn_admin = psycopg2.connect("dbname=sotion-dev user=username host=localhost")
+
 
 #initialize the login-- Used a tutorial from https://www.youtube.com/watch?v=2dEM-s3mRLE
 login_manager = LoginManager()
@@ -45,6 +54,10 @@ class Post(db.Model):
     post_content = db.Column(db.String(2800), unique=False) 
     profile_pic = db.Column(db.Boolean, default=False)  
     post_username = db.Column(db.String(30))
+
+#LOL don't do this. Paul helped Izzy figure out this hack to create the tables automatically when the task starts
+# If this app evolves, replace this with a migration strategy
+db.create_all() 
 
 @login_manager.user_loader
 def user_loader(user_id):
