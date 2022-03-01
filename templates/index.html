@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="/styles/signin.css" />
+  <title>{{title}}</title>
+
+</head>
+
+<body>
+  <div id="logo-and-form">
+    <form action="/" method="post">
+      <div id="login">
+        <h2 id="login-text">Login</h2>
+      </div>
+      <div id="form-container">
+        <div class="form-group first">
+          <label>Username</label>
+          {{ form.hidden_tag() }}
+          {{ form.username}}
+        </div>
+        <div class=" form-group ">
+          <label>Password</label>
+          {{ form.password}}
+        </div>
+        <div class="d-sm-flex password-forgotpword">
+          <label class="control control--checkbox mb-3 mb-sm-0"><span class="caption">Remember me</span>
+            {{ form.remember}}
+          </label>
+          <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span>
+        </div>
+        <input id="login-button" type="submit" value="Log In" class="btn btn-block btn-primary">
+        <span id="create-account"><a href="{{url_for('signup')}}" class="forgot-pass">Don't have an Account?</a></span>
+      </div>
+    </form>
+    <img id='animation-login' src="/images/sotion.gif" style="border-radius: 2em;" class="img-logo img-fluid"
+      alt="So-tion Logo" />
+
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

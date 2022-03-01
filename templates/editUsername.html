@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 style="margin-top:3em;">Edit your Username :3</h1>
+
+<div class="form-container">
+    <form action="/update-username" method="post">
+        {{ form.hidden_tag() }}
+        <label>New Username</label>
+        {{ form.username_change }}
+        <input id="submit-button" type="submit" value="Submit" class="buttons btn btn-block btn-primary">
+    </form>
+</div>
+
+<link rel="stylesheet" href="styles/editProfile.css" />
+
+{% endblock content %}

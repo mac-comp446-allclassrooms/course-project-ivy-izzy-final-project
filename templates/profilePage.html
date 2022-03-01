@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="../styles/pfpage.css" />
+<div class="container">
+    {% if pfp == 'template1' %}
+    <div class="template_1">
+        <img src="/images/So-tion-logo-pic.png" style="height:150px;
+            border-radius: 50%; border: 5px solid #0f5302;" alt="A User's Profile Picture" class='pfp'>
+        <h1> {{ profileusername }}</h1>
+        <p><em> {{bio}}</em></p>
+        <a href="{{url_for('create')}}"><button class="buttons">create post</button></a>
+    </div>
+    {% elif pfp == 'template2' %}
+    <div class="template_2">
+        <img src="/images/So-tion-logo-pic.png" style="height:150px;
+            border-radius: 50%; border: 5px solid #0f5302;" alt="A User's Profile Picture" class=pfp>
+        <h1> {{ profileusername }}</h1>
+        <p><em> {{bio}}</em></p>
+        <a href="{{url_for('create')}}"><button class="buttons">create post</button></a>
+    </div>
+    {% elif pfp == 'template3' %}
+    <div class="template_3">
+        <img src="/images/So-tion-logo-pic.png" style="height:150px;
+            border-radius: 50%; border: 5px solid #0f5302;" alt="A User's Profile Picture" class=pfp>
+        <h1> {{ profileusername }}</h1>
+        <p><em> {{bio}}</em></p>
+        <a href="{{url_for('create')}}"><button class="buttons">create post</button></a>
+    </div>
+
+    {% elif pfp == 'template4' %}
+    <div class="template_4">
+        <img src="/images/So-tion-logo-pic.png" style="height:150px;
+            border-radius: 50%; border: 5px solid #0f5302;" alt="A User's Profile Picture" class=pfp>
+        <h1> {{ profileusername }}</h1>
+        <p><em> {{bio}}</em></p>
+        <a href="{{url_for('create')}}"><button class="buttons">create post</button></a>
+    </div>
+
+    {% elif pfp == 'template5' %}
+    <div class="template_5">
+        <img src="/images/So-tion-logo-pic.png" style="height:150px;
+            border-radius: 50%; border: 5px solid #0f5302;" alt="A User's Profile Picture" class=pfp>
+        <h1> {{ profileusername }}</h1>
+        <p><em> {{bio}}</em></p>
+        <a href="{{url_for('create')}}"><button class="buttons">create post</button></a>
+    </div>
+
+    {% else %}
+    <div class="template_6">
+        <img src="/images/So-tion-logo-pic.png" style="height:150px;
+            border-radius: 50%; border: 5px solid #0f5302;" alt="A User's Profile Picture" class=pfp>
+        <h1> {{ profileusername }}</h1>
+        <p><em> {{bio}}</em></p>
+        <a href="{{url_for('create')}}"><button class="buttons">create post</button></a>
+    </div>
+
+    {% endif %}
+
+    {% for post in posts %}
+    <!-- I used this website: https://stackoverflow.com/questions/17691838/range-in-jinja2-inside-a-for-loop-->
+    <a href="{{url_for('clickedpost', id=post.id)}}">
+        <div>
+            <div class="content">
+                <div class="pic-and-username">
+                    <img class="profile-icon" src="../images/profile-icon.png" alt="Profile picture">
+                </div>
+                <div class="content-and-comments">
+                    <h2>{{ post.post_title }}</h2>
+                    <p> {{ post.post_content }}</p>
+                    <div class="comments">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+{% endblock content %}

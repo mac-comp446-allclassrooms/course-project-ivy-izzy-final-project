@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 style="margin-top:3em;">Edit your Profile Page Layout :3</h1>
+<h3 style="color: #3D524c;"> choose which one you like on the right! </h3>
+
+<div class="form-container">
+    <form action="/update-profile" method="post">
+        {{ form.hidden_tag() }}
+        <div id="all-templates">
+            <div class="template-label-and-pic">
+                <label>Template #1 </label>
+                <img class="profile-icon" src="../images/template1.png" alt="Profile picture"
+                    style="width: 33em; height:30em ;">
+            </div>
+            <div class="template-label-and-pic">
+                <label>Template #2 </label>
+                <img class="profile-icon" src="../images/template2.png" alt="Profile picture"
+                    style="width: 33em; height:30em ;">
+            </div>
+            <div class="template-label-and-pic">
+                <label>Template #3 </label>
+                <img class="profile-icon" src="../images/template3.png" alt="Profile picture"
+                    style="width: 33em; height:30em ;">
+            </div>
+            <div class="template-label-and-pic">
+                <label>Template #4 </label>
+                <img class="profile-icon" src="../images/template4.png" alt="Profile picture"
+                    style="width: 33em; height:30em ;">
+            </div>
+            <div class="template-label-and-pic">
+                <label>Template #5 </label>
+                <img class="profile-icon" src="../images/template5.png" alt="Profile picture"
+                    style="width: 33em; height:30em ;">
+            </div>
+            <div class="template-label-and-pic">
+                <label>Template #6 </label>
+                <img class="profile-icon" src="../images/template6.png" alt="Profile picture"
+                    style="width: 33em; height:30em ;">
+            </div>
+        </div>
+        {{ form.profile_pic_placement}}
+        <input id="submit-button" style="width: 10em; margin-bottom: 2em;" type="submit" value="Submit"
+            class="buttons btn btn-block btn-primary">
+    </form>
+</div>
+
+<link rel="stylesheet" href="styles/editProfile.css" />
+<link rel="stylesheet" href="styles/settings.css" />
+
+{% endblock content %}

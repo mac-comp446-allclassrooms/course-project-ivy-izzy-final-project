@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if dm %}
+<div id="settings-div">
+        <h1 style="margin-top:3em;">&#x1F510; Settings &#x1F510;</h1>
+        <div class="set-buttons">
+                <a href="{{url_for('darkmode')}}"><button class="buttons">Dark Mode</button></a>
+                <a href="{{url_for('editprofile')}}"><button type="submit"
+                                class="buttons btn btn-block btn-primary">Edit Profile</button></a>
+                <a href="{{url_for('editusername')}}"><button type="submit"
+                                class="buttons btn btn-block btn-primary">Edit Username</button></a>
+                <a href="{{url_for('edityourbio')}}"><button type="submit"
+                                class="buttons btn btn-block btn-primary">Edit Bio</button></a>
+                <a href="{{url_for('deleteconfirm')}}"> <button type="submit"
+                                class="buttons btn btn-block btn-primary">Delete Account</button></a>
+                <a href="{{url_for('logout')}}"> <button type="submit"
+                                class="buttons btn btn-block btn-primary">Logout</button></a>
+        </div>
+</div>
+<link rel="stylesheet" href="../styles/settings.css" />
+
+{% else %}
+<div id="settings-div">
+        <h1 style="background-color: #66afa5; margin-top:3em; padding-left: 20px; margin-right:30em">&#x1F510; Settings
+                &#x1F510;</h1>
+        <div class="set-buttons">
+                <a href="{{url_for('darkmode')}}"><button class="buttons">Dark Mode</button></a>
+                <a href="{{url_for('editprofile')}}"><button id="edit-profile" type="submit"
+                                class="buttons btn btn-block btn-primary">Edit Profile</button></a>
+                <a href="{{url_for('editusername')}}"><button type="submit"
+                                class="buttons btn btn-block btn-primary">Edit Username</button></a>
+                <a href="{{url_for('edityourbio')}}"><button type="submit"
+                                class="buttons btn btn-block btn-primary">Edit Bio</button></a>
+                <a href="{{url_for('deleteconfirm')}}"> <button type="submit"
+                                class="buttons btn btn-block btn-primary">Delete Account</button></a>
+                <a href="{{url_for('logout')}}"> <button type="submit"
+                                class="buttons btn btn-block btn-primary">Logout</button></a>
+        </div>
+</div>
+<link rel="stylesheet" href="../styles/settings.css" />
+
+{% endif %}
+
+{% endblock content %}

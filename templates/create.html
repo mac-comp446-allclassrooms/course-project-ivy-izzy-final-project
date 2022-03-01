@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class='form-container'>
+    <h1 style="margin-top:3em;">Create A Post!</h1>
+    <form action="/homefeed" method='POST' id="upload-podcast">
+        {{ form.hidden_tag() }}
+        <div id="input-container">
+            <label class="centering">Title</label>
+            {{ form.title }}
+            <label class="centering">Content</label>
+            {{ form.content }}
+            <input id="signup-button" style="align-self: center;width:10em; margin-bottom: 2em;" type="submit"
+                value="Submit post :)" class="centering buttons btn btn-block btn-primary">
+        </div>
+    </form>
+</div>
+<link rel="stylesheet" href="styles/create.css">
+{% endblock content %}

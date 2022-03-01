@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- This page is not implemented on the website yet, but we plan to implement it later so we decided to keep it
+with our code :) -->
+<div class='form-container'>
+    <h1 style="margin-top:3em;">Create A Post!</h1>
+
+    <form action="/update-pfp" method='POST' id="upload-podcast" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div id="input-container">
+            <label class="centering">Upload a Profile Pic</label>
+            {{ form.profilepic.file.filename }}
+            <input id="signup-button" style="align-self: center;width:10em; margin-bottom: 2em;" type="submit"
+                value="Submit post :)" class="centering buttons btn btn-block btn-primary">
+        </div>
+    </form>
+</div>
+<script src="scripts/create.js"></script>
+<link rel="stylesheet" href="styles/create.css">
+{% endblock content %}

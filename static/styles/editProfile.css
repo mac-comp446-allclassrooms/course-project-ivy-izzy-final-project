@@ -1,0 +1,37 @@
+.form-container {
+    display:flex;
+    justify-content: left;
+    align-items: flex-start;
+}
+
+body {
+    margin-left: 3em;
+}
+
+#all-templates {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    column-gap: 2em;
+    flex-wrap: wrap;
+    row-gap: 2em;
+    margin-bottom:1em;
+}
+.template-label-and-pic{
+    display:flex;
+    flex-direction: column;
+}
+
+.buttons { 
+    background-color: #66afa5;
+    border:solid;
+    border-width: 2px;
+    border-color: #3D524c;
+    border-radius: 35px;
+    color:white;
+    width: 6em;
+}
+
+#edit-bio-title {
+    margin-top:3em;
+}
